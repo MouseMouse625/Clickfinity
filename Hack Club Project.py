@@ -39,7 +39,7 @@ clickValue = 1
 clickCount = append(clickValue , "DPC" , "DPC")
 clickUpgradeValue = 0
 clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades")
-prestigeValue = 0
+prestigeValue = 10
 prestigeCount = append(prestigeValue , "Prestige" , "Prestiges")
 stageValue = 1
 stageCount = append("Stage" , stageValue , stageValue)
@@ -47,11 +47,15 @@ upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - dotV
 upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade")
 prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - dotValue
 prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige")
-stagePrestigeRequirement = [10 - prestigeValue , int((((15000 * ((prestigeValue + 1) ** prestigeValue)) * 0.75) + 1) - dotValue)]
+stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - dotValue)]
 stagePrestigeRequirementCount = append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and ") + append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige") 
 firstDotMessage = False
 firstUpgradeMessage = False
-statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + stagePrestigeRequirementCount
+firstPrestigeMessage = False
+firstStagePrestigeMessage = False
+stageTwoMessage = False
+stageThreeMessage = False
+statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
 screen = py.display.set_mode((screenWidth , screenHeight))
 py.display.set_icon(py.image.load("Window Icon.png"))
 py.display.set_caption("Hack Club Project")
@@ -88,7 +92,7 @@ while programRunning:
                     clickValue = 1
                     clickUpgradeValue = 0
             if mouseX > stagePrestigeButton.rect.left and mouseX < stagePrestigeButton.rect.right and mouseY > stagePrestigeButton.rect.top and mouseY < stagePrestigeButton.rect.bottom:
-                if prestigeValue > 9 and dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * 0.75):
+                if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                     stageValue = stageValue + 1
                     prestigeValue = 0
                     dotValue = 0
@@ -103,25 +107,47 @@ while programRunning:
         elif event.type == IDLEDPCGAIN:
             if stageValue > 2:
                 clickValue = round(clickValue * 1.5)
-    if dotValue == 1 and firstDotMessage == False:
-        ms.showinfo("Starting Off" , "You've gained your first dot. You can earn more, and once you have a substantial amount, you'll get another message like this one.")
+    if dotValue > 0 and firstDotMessage == False:
         firstDotMessage = True
-    if dotValue == 101 and firstUpgradeMessage == False:
-        ms.showinfo("Upgrades" , "You've reached your first upgrade. When you press that yellow button that you will see shortly, your Dots Per Click (DPC) value will increment by one. This changes how many dots you earn per click.")
+        ms.showinfo("Starting Off" , "You've gained your first dot. You can earn more, and once you have a substantial amount, you'll get another message like this one.")
+    if dotValue > 100 and firstUpgradeMessage == False:
         firstUpgradeMessage = True
+        ms.showinfo("Upgrades" , "You've reached your first upgrade. When you press that yellow button that you will see shortly, your Dots Per Click (DPC) value will increment by one. This changes how many dots you earn per click.")
         ms.showinfo("Statistics" , "To see some statistics, you can press the Space key on your keyboard.")
+    if dotValue > 11250 and firstPrestigeMessage == False:
+        firstPrestigeMessage = True
+        ms.showinfo("Prestiges" , "You have reached the point where you can undergo your first prestige. When you press the red button that you will see shortly, you will prestige. This means that all of your statistics, including your dots and DPC will be reset to 0 and 1 respectively. Things like how many times you have prestiged will be incremented by one of course, and your stage (you'll learn about that later) will stay the same. Although this seems purely negative, the rate at which your DPC increments will be vastly different (positively), and you will reach more and more dot counts.")
+    if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) and firstStagePrestigeMessage == False:
+        firstStagePrestigeMessage = True
+        ms.showinfo("Stage Prestiges" , "After a long time, you have reached your first stage prestige. Stage prestiges reset everything that prestiges do, as well as your prestige count. On the other hand, your stage increments by one. A stage prestige always automates some part of the game that hasn't been automated before, eventualy allowing full idle gameplay. You can stage prestige by pressing the green button that you will se shortly. There is a suprise in Stage 2.")
+    if stageValue > 1 and stageTwoMessage == False:
+        stageTwoMessage = True
+        ms.showinfo("Stage 2" , "This is the second Stage. As promised, once you progress after reading this message, a part of the game will be automated. Good luck.")
+    if stageValue > 2 and stageThreeMessage == False:
+        stageThreeMessage = True
+        ms.showinfo("Stage 3" , "You should have gotten the gist by now. Last time, idle dot gain was implemented. Now, something else will be automated. See you in Stage 4.")
     screen.fill((255 , 0 , 255))
     mouseX , mouseY = py.mouse.get_pos()
     text.empty()
+    upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - dotValue
+    prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - dotValue
+    stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - dotValue)]
     dotCount = append(dotValue , "Dot" , "Dots")
+    clickCount = append(clickValue , "DPC" , "DPC")
+    clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades")
+    prestigeCount = append(prestigeValue , "Prestige" , "Prestiges")
+    upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade")
+    prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige")
+    stagePrestigeRequirementCount = append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and ") + append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige") 
     dotCounter = Text(dotCount , 440 , 20 , (255 , 255 , 255) , 25)
     text.add(dotCounter)
+    statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
     screen.blit(dotButton.surface , dotButton.rect)
     if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
         screen.blit(clickUpgradeButton.surface , clickUpgradeButton.rect)
     if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
         screen.blit(prestigeButton.surface , prestigeButton.rect)
-    if prestigeValue > 9 and dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * 0.75):
+    if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
         screen.blit(stagePrestigeButton.surface , stagePrestigeButton.rect)
     for textbox in text:
         screen.blit(textbox.surface , textbox.rect)
