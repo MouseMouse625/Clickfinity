@@ -26,48 +26,62 @@ class Text(py.sprite.Sprite):
         self.rect.center = (self.xPosition , self.yPosition)
 def comfortaa(size):
     return py.font.Font("Comfortaa-Light.ttf" , (size))
-def append(prefix , singularSuffix , pluralSuffix):
-    if prefix == 1:
-        return str(prefix) + " " + str(singularSuffix)
+def append(prefix , singularSuffix , pluralSuffix , sciNotationBool):
+    if sciNotationBool == True:
+        if prefix == 1:
+            return str(prefix) + " " + str(singularSuffix)
+        else:
+            if int(prefix) > 999999:
+                prefix = "{:.2e}".format(prefix)
+            return str(prefix) + " " + str(pluralSuffix)
     else:
-        return str(prefix) + " " + str(pluralSuffix)
+        if prefix == 1:
+            return str(prefix) + " " + str(singularSuffix)
+        else:
+            return str(prefix) + " " + str(pluralSuffix)
 screenWidth = 500
 screenHeight = 500
 dotValue = 0
-dotCount = append(dotValue , "Dot" , "Dots")
+dotCount = append(dotValue , "Dot" , "Dots" , True)
 clickValue = 1
-clickCount = append(clickValue , "DPC" , "DPC")
+clickCount = append(clickValue , "DPC" , "DPC" , True)
 clickUpgradeValue = 0
-clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades")
+clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades" , True)
 prestigeValue = 10
-prestigeCount = append(prestigeValue , "Prestige" , "Prestiges")
+prestigeCount = append(prestigeValue , "Prestige" , "Prestiges" , True)
 stageValue = 1
-stageCount = append("Stage" , stageValue , stageValue)
+stageCount = append("Stage" , stageValue , stageValue , False)
 upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - dotValue
-upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade")
+upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade" , True)
 prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - dotValue
-prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige")
+prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige" , True)
 stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - dotValue)]
-stagePrestigeRequirementCount = append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and ") + append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige") 
+stagePrestigeRequirementCount = str(append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and " , True)) + str(append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige" , True))
 firstDotMessage = False
 firstUpgradeMessage = False
 firstPrestigeMessage = False
 firstStagePrestigeMessage = False
 stageTwoMessage = False
 stageThreeMessage = False
+stageFourMessage = False
+stageFiveMessage = False
 statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
 screen = py.display.set_mode((screenWidth , screenHeight))
 py.display.set_icon(py.image.load("Window Icon.png"))
 py.display.set_caption("Hack Club Project")
 IDLEDOTGAIN = py.USEREVENT + 1
 IDLEDPCGAIN = py.USEREVENT + 2
+IDLEUPGRADE = py.USEREVENT + 3
+IDLEPRESTIGE = py.USEREVENT + 4
 py.time.set_timer(IDLEDOTGAIN , 50)
 py.time.set_timer(IDLEDPCGAIN , 500)
+py.time.set_timer(IDLEUPGRADE , 10)
+py.time.set_timer(IDLEPRESTIGE , 10)
 dotButton = Button(30 , 30 , 20 , 20 , (0 , 200 , 255))
 clickUpgradeButton = Button(30 , 30 , 20 , 60 , (200 , 255 , 0))
 prestigeButton = Button(30 , 30 , 20 , 100 , (255 , 0 , 0))
 stagePrestigeButton = Button(30 , 30 , 20 , 140 , (0 , 255 , 20))
-dotCounter = Text(dotCount , 440 , 20 , (255 , 255 , 255) , 25)
+dotCounter = Text(dotCount , 410 , 20 , (255 , 255 , 255) , 25)
 text = py.sprite.Group()
 text.add(dotCounter)
 programRunning = True
@@ -78,15 +92,15 @@ while programRunning:
     for event in py.event.get():
         if event.type == py.QUIT:
             programRunning = False
-        elif event.type == py.MOUSEBUTTONDOWN:
+        if event.type == py.MOUSEBUTTONDOWN:
             if mouseX > dotButton.rect.left and mouseX < dotButton.rect.right and mouseY > dotButton.rect.top and mouseY < dotButton.rect.bottom:
                 dotValue = dotValue + clickValue
             if mouseX > clickUpgradeButton.rect.left and mouseX < clickUpgradeButton.rect.right and mouseY > clickUpgradeButton.rect.top and mouseY < clickUpgradeButton.rect.bottom:
-                if dotValue > 10 ** (clickUpgradeValue + 2):
+                if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                     clickValue = (clickValue + 1) * (prestigeValue + 1)
                     clickUpgradeValue = clickUpgradeValue + 1
             if mouseX > prestigeButton.rect.left and mouseX < prestigeButton.rect.right and mouseY > prestigeButton.rect.top and mouseY < prestigeButton.rect.bottom:
-                if dotValue > (15000 * ((prestigeValue + 1) ** prestigeValue)):
+                if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                     prestigeValue = prestigeValue + 1
                     dotValue = 0
                     clickValue = 1
@@ -98,15 +112,27 @@ while programRunning:
                     dotValue = 0
                     clickValue = 1
                     clickUpgradeValue = 0
-        elif event.type == py.KEYDOWN:
+        if event.type == py.KEYDOWN:
             if event.key == py.K_SPACE:
                 ms.showinfo("Statistics" , statistics)
-        elif event.type == IDLEDOTGAIN:
+        if event.type == IDLEDOTGAIN:
             if stageValue > 1:
                 dotValue = dotValue + clickValue
-        elif event.type == IDLEDPCGAIN:
+        if event.type == IDLEDPCGAIN:
             if stageValue > 2:
                 clickValue = round(clickValue * 1.5)
+        if event.type == IDLEUPGRADE:
+            if stageValue > 3:
+                if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+                    clickValue = (clickValue + 1) * (prestigeValue + 1)
+                    clickUpgradeValue = clickUpgradeValue + 1
+        if event.type == IDLEPRESTIGE:
+            if stageValue > 4:
+                if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+                    prestigeValue = prestigeValue + 1
+                    dotValue = 0
+                    clickValue = 1
+                    clickUpgradeValue = 0
     if dotValue > 0 and firstDotMessage == False:
         firstDotMessage = True
         ms.showinfo("Starting Off" , "You've gained your first dot. You can earn more, and once you have a substantial amount, you'll get another message like this one.")
@@ -125,21 +151,28 @@ while programRunning:
         ms.showinfo("Stage 2" , "This is the second Stage. As promised, once you progress after reading this message, a part of the game will be automated. Good luck.")
     if stageValue > 2 and stageThreeMessage == False:
         stageThreeMessage = True
-        ms.showinfo("Stage 3" , "You should have gotten the gist by now. Last time, idle dot gain was implemented. Now, something else will be automated. See you in Stage 4.")
+        ms.showinfo("Stage 3" , "You should have gotten the gist by now. Last time, Idle Dot Gain was implemented. Now, something else will be automated. See you in Stage 4.")
+    if stageValue > 3 and stageFourMessage == False:
+        stageFourMessage = True
+        ms.showinfo("Stage 4" , "You have progressed pretty far into the game by now. In Stage 3, Idle DPC Gain was added. As promised previously, something else will be automated. If you make it to Stage 5, see you there.")
+    if stageValue > 4 and stageFiveMessage == False:
+        stageFiveMessage = True
+        ms.showinfo("Stage 5" , "By now, you must have guessed what will be automated next. The next time I see you, there will be something different...")
     screen.fill((255 , 0 , 255))
     mouseX , mouseY = py.mouse.get_pos()
     text.empty()
     upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - dotValue
     prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - dotValue
     stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - dotValue)]
-    dotCount = append(dotValue , "Dot" , "Dots")
-    clickCount = append(clickValue , "DPC" , "DPC")
-    clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades")
-    prestigeCount = append(prestigeValue , "Prestige" , "Prestiges")
-    upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade")
-    prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige")
-    stagePrestigeRequirementCount = append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and ") + append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige") 
-    dotCounter = Text(dotCount , 440 , 20 , (255 , 255 , 255) , 25)
+    dotCount = append(dotValue , "Dot" , "Dots" , True)
+    clickCount = append(clickValue , "DPC" , "DPC" , True)
+    stageCount = append("Stage" , stageValue , stageValue , False)
+    clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades" , True)
+    prestigeCount = append(prestigeValue , "Prestige" , "Prestiges" , True)
+    upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade" , True)
+    prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige" , True)
+    stagePrestigeRequirementCount = append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and " , True) + append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige" , True) 
+    dotCounter = Text(dotCount , 410 , 20 , (255 , 255 , 255) , 25)
     text.add(dotCounter)
     statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
     screen.blit(dotButton.surface , dotButton.rect)
