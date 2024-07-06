@@ -62,7 +62,7 @@ clickValue = 1
 clickCount = append(clickValue , "DPC" , "DPC" , True)
 clickUpgradeValue = 0
 clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades" , True)
-prestigeValue = 10
+prestigeValue = 0
 prestigeCount = append(prestigeValue , "Prestige" , "Prestiges" , True)
 stageValue = 1
 stageCount = append("Stage" , stageValue , stageValue , False)
@@ -101,7 +101,7 @@ classicClickUpgradeButton = Button(30 , 30 , 250 , 230 , (200 , 255 , 0))
 classicPrestigeButton = Button(30 , 30 , 250 , 270 , (255 , 0 , 0))
 classicStagePrestigeButton = Button(30 , 30 , 250 , 310 , (0 , 255 , 20))
 classicStartButton = Button(110 , 60 , 250 , 220 , (0 , 200 , 255))
-classicThemesButton = Button(105 , 30 , 250 , 250 , (0 , 200 , 255))
+classicThemesButton = Button(105 , 30 , 250 , 233 , (0 , 200 , 255))
 classicInvertedButton = Button(138 , 38 , 250 , 130 , (0 , 200 , 255))
 classicInvertedishButton = Button(170 , 38 , 250 , 170 , (0 , 200 , 255))
 classicYangYinButton = Button(138 , 38 , 250 , 210 , (0 , 200 , 255))
@@ -111,6 +111,7 @@ classicClassicishButton = Button(160 , 38 , 250 , 330 , (0 , 200 , 255))
 classicAbyssButton = Button(160 , 38 , 250 , 370 , (0 , 200 , 255))
 classicBackButton = Button(78 , 33  , 55 , 35 , (0 , 200 , 255))
 classicSettingsButton = Button(110 , 30 , 250 , 270 , (0 , 200 , 255))
+classicFactoryResetButton = Button(180 , 30 , 250 , 267 , (0 , 200 , 255))
 classicInvertedButtonText = Text("Inverted" , 250 , 130 , (255 , 255 , 255) , 30)
 classicInvertedishButtonText = Text("Invertedish" , 250 , 170 , (255 , 255 , 255) , 30)
 classicYangYinButtonText = Text("Yang Yin" , 250 , 210 , (255 , 255 , 255) , 30)
@@ -120,15 +121,16 @@ classicClassicishButtonText = Text("Classicish" , 250 , 330 , (255 , 255 , 255) 
 classicAbyssButtonText = Text("Abyss" , 250 , 370 , (255 , 255 , 255) , 30)
 classicBackButtonText = Text("Back" , 55 , 35 , (255 , 255 , 255) , 30)
 classicStartButtonText = Text("Play" , 250 , 218 , (255 , 255 , 255) , 50)
-classicThemesButtonText = Text("Themes" , 250 , 250 , (255 , 255 , 255) , 25)
+classicThemesButtonText = Text("Themes" , 250 , 233 , (255 , 255 , 255) , 25)
 classicSettingsButtonText = Text("Settings" , 250 , 270 , (255 , 255 , 255) , 25)
+classicFactoryResetButtonText = Text("Factory Reset" , 250 , 267 , (255 , 255 , 255) , 25)
 classicDotCounter = Text(dotCount , 410 , 35 , (255 , 255 , 255) , 25)
 classicMenuObjects = py.sprite.Group()
 classicSettingsObjects = py.sprite.Group()
 classicThemesObjects = py.sprite.Group()
 classicGameObjects = py.sprite.Group()
 classicMenuObjects.add(classicStartButton , classicSettingsButton , classicStartButtonText , classicSettingsButtonText)
-classicSettingsObjects.add(classicThemesButton , classicThemesButtonText , classicBackButton , classicBackButtonText)
+classicSettingsObjects.add(classicThemesButton , classicThemesButtonText , classicBackButton , classicBackButtonText , classicFactoryResetButton , classicFactoryResetButtonText)
 classicThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , classicClassicButtonText , classicYinYangButtonText , classicYangYinButtonText , classicInvertedButton , classicInvertedButtonText , classicInvertedishButton , classicInvertedishButtonText , classicClassicishButton , classicClassicishButtonText , classicAbyssButton , classicAbyssButtonText , classicBackButton , classicBackButtonText)
 classicGameObjects.add(classicDotButton , classicDotCounter , classicBackButton , classicBackButtonText)
 yinYangDotButton = yinYang(classicDotButton , False)
@@ -144,6 +146,7 @@ yinYangYangYinButton = yinYang(classicYangYinButton , False)
 yinYangClassicButton = yinYang(classicClassicButton , False)
 yinYangYinYangButton = yinYang(classicYinYangButton , False)
 yinYangClassicishButton = yinYang(classicClassicishButton , False)
+yinYangFactoryResetButton = yinYang(classicFactoryResetButton , False)
 yinYangAbyssButton = yinYang(classicAbyssButton , False)
 yinYangBackButton = yinYang(classicBackButton , False)
 yinYangInvertedButtonText = yinYang(classicInvertedButtonText , True)
@@ -152,6 +155,7 @@ yinYangYangYinButtonText = yinYang(classicYangYinButtonText , True)
 yinYangClassicButtonText = yinYang(classicClassicButtonText , True)
 yinYangYinYangButtonText = yinYang(classicYinYangButtonText , True)
 yinYangClassicishButtonText = yinYang(classicClassicishButtonText , True)
+yinYangFactoryResetButtonText = yinYang(classicFactoryResetButtonText , True)
 yinYangAbyssButtonText = yinYang(classicAbyssButtonText , True)
 yinYangBackButtonText = yinYang(classicBackButtonText , True)
 yinYangThemesButtonText = yinYang(classicThemesButtonText , True)
@@ -162,7 +166,7 @@ yinYangSettingsObjects = py.sprite.Group()
 yinYangThemesObjects = py.sprite.Group()
 yinYangGameObjects = py.sprite.Group()
 yinYangMenuObjects.add(yinYangStartButton , yinYangSettingsButton , yinYangSettingsButtonText , yinYangStartButtonText)
-yinYangSettingsObjects.add(yinYangThemesButton , yinYangThemesButtonText , yinYangBackButton , yinYangBackButtonText)
+yinYangSettingsObjects.add(yinYangThemesButton , yinYangThemesButtonText , yinYangBackButton , yinYangBackButtonText , yinYangFactoryResetButton , yinYangFactoryResetButtonText)
 yinYangThemesObjects.add(yinYangClassicButton , yinYangClassicButtonText , yinYangYangYinButton , yinYangYangYinButtonText , yinYangYinYangButton , yinYangYinYangButtonText , yinYangBackButton , yinYangBackButtonText , yinYangInvertedButton , yinYangInvertedButtonText , yinYangInvertedishButton , yinYangInvertedishButtonText , yinYangClassicishButton , yinYangClassicishButtonText , yinYangAbyssButton , yinYangAbyssButtonText)
 yinYangGameObjects.add(yinYangDotButton , classicDotCounter , yinYangBackButton , yinYangBackButtonText)
 yangYinDotButton = yinYang(classicDotButton , True)
@@ -177,6 +181,7 @@ yangYinYangYinButton = yinYang(classicYangYinButton , True)
 yangYinClassicButton = yinYang(classicClassicButton , True)
 yangYinYinYangButton = yinYang(classicYinYangButton , True)
 yangYinClassicishButton = yinYang(classicClassicishButton , True)
+yangYinFactoryResetButton = yinYang(classicFactoryResetButton , True)
 yangYinAbyssButton = yinYang(classicAbyssButton , True)
 yangYinBackButton = yinYang(classicBackButton , True)
 yangYinSettingsButton = yinYang(classicSettingsButton , True)
@@ -186,7 +191,7 @@ yangYinSettingsObjects = py.sprite.Group()
 yangYinThemesObjects = py.sprite.Group()
 yangYinGameObjects = py.sprite.Group()
 yangYinMenuObjects.add(yangYinStartButton , yangYinSettingsButton , classicSettingsButtonText , classicStartButtonText)
-yangYinSettingsObjects.add(yangYinThemesButton , classicThemesButtonText , yangYinBackButton , classicBackButtonText)
+yangYinSettingsObjects.add(yangYinThemesButton , classicThemesButtonText , yangYinBackButton , classicBackButtonText , yangYinFactoryResetButton , classicFactoryResetButtonText)
 yangYinThemesObjects.add(yangYinClassicButton , classicClassicButtonText , yangYinYinYangButton , classicYinYangButtonText , yangYinYangYinButton , classicYangYinButtonText , yangYinBackButton , classicBackButtonText , yangYinInvertedButton , classicInvertedButtonText , yangYinInvertedishButton , classicInvertedishButtonText , yangYinClassicishButton , classicClassicishButtonText , yangYinAbyssButton , classicAbyssButtonText)
 yangYinGameObjects.add(yangYinDotButton , yangYinDotCounter , yangYinBackButton , classicBackButtonText)
 classicishMenuObjects = py.sprite.Group()
@@ -194,7 +199,7 @@ classicishSettingsObjects = py.sprite.Group()
 classicishThemesObjects = py.sprite.Group()
 classicishGameObjects = py.sprite.Group()
 classicishMenuObjects.add(classicStartButton , classicSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
-classicishSettingsObjects.add(classicThemesButton , yinYangThemesButtonText , classicBackButton , yinYangBackButtonText)
+classicishSettingsObjects.add(classicThemesButton , yinYangThemesButtonText , classicBackButton , yinYangBackButtonText , classicFactoryResetButton , yinYangFactoryResetButtonText)
 classicishThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , classicBackButton , yinYangBackButtonText , classicInvertedButton , yinYangInvertedButtonText , classicInvertedishButton , yinYangInvertedishButtonText , classicClassicishButton , yinYangClassicishButtonText , classicAbyssButton , yinYangAbyssButtonText)
 classicishGameObjects.add(classicDotButton , yangYinDotCounter , classicBackButton , yinYangBackButtonText)
 invertedishDotButton = Button(30 , 30 , 250 , 190 , (255 , 55 , 0))
@@ -202,9 +207,10 @@ invertedishClickUpgradeButton = Button(30 , 30 , 250 , 230 , (55 , 0 , 255))
 invertedishPrestigeButton = Button(30 , 30 , 250 , 270 , (0 , 255 , 255))
 invertedishStagePrestigeButton = Button(30 , 30 , 250 , 310 , (255 , 0 , 235))
 invertedishStartButton = Button(110 , 60 , 250 , 220 , (255 , 55 , 0))
-invertedishThemesButton = Button(105 , 30 , 250 , 250 , (255 , 55 , 0))
+invertedishThemesButton = Button(105 , 30 , 250 , 233 , (255 , 55 , 0))
 invertedishInvertedButton = Button(138 , 38 , 250 , 130 , (255 , 55 , 0))
 invertedishInvertedishButton = Button(170 , 38 , 250 , 170 , (255 , 55 , 0))
+invertedishFactoryResetButton = Button(180 , 30 , 250 , 267 , (255 , 55 , 0))
 invertedishYangYinButton = Button(138 , 38 , 250 , 210 , (255 , 55 , 0))
 invertedishClassicButton = Button(110 , 38 , 250 , 250 , (255 , 55 , 0))
 invertedishYinYangButton = Button(138 , 38 , 250 , 290 , (255 , 55 , 0))
@@ -217,9 +223,25 @@ invertedishSettingsObjects = py.sprite.Group()
 invertedishThemesObjects = py.sprite.Group()
 invertedishGameObjects = py.sprite.Group()
 invertedishMenuObjects.add(invertedishStartButton , invertedishSettingsButton , classicStartButtonText , classicSettingsButtonText)
-invertedishSettingsObjects.add(invertedishThemesButton , classicThemesButtonText , invertedishBackButton , classicBackButtonText)
+invertedishSettingsObjects.add(invertedishThemesButton , classicThemesButtonText , invertedishBackButton , classicBackButtonText , invertedishFactoryResetButton , classicFactoryResetButtonText)
 invertedishThemesObjects.add(invertedishClassicButton , invertedishYinYangButton , invertedishYangYinButton , classicClassicButtonText , classicYinYangButtonText , classicYangYinButtonText , invertedishInvertedButton , classicInvertedButtonText , invertedishInvertedishButton , classicInvertedishButtonText , invertedishClassicishButton , classicClassicishButtonText , invertedishAbyssButton , classicAbyssButtonText , invertedishBackButton , classicBackButtonText)
 invertedishGameObjects.add(invertedishDotButton , classicDotCounter , invertedishBackButton , classicBackButtonText)
+invertedMenuObjects = py.sprite.Group()
+invertedSettingsObjects = py.sprite.Group()
+invertedThemesObjects = py.sprite.Group()
+invertedGameObjects = py.sprite.Group()
+invertedMenuObjects.add(invertedishStartButton , invertedishSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
+invertedSettingsObjects.add(invertedishThemesButton , yinYangThemesButtonText , invertedishBackButton , yinYangBackButtonText , invertedishFactoryResetButton , yinYangFactoryResetButtonText)
+invertedThemesObjects.add(invertedishClassicButton , invertedishYinYangButton , invertedishYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , invertedishInvertedButton , yinYangInvertedButtonText , invertedishInvertedishButton , yinYangInvertedishButtonText , invertedishClassicishButton , yinYangClassicishButtonText , invertedishAbyssButton , yinYangAbyssButtonText , invertedishBackButton , yinYangBackButtonText)
+invertedGameObjects.add(invertedishDotButton , yangYinDotCounter , invertedishBackButton , yinYangBackButtonText)
+abyssMenuObjects = py.sprite.Group()
+abyssSettingsObjects = py.sprite.Group()
+abyssThemesObjects = py.sprite.Group()
+abyssGameObjects = py.sprite.Group()
+abyssMenuObjects.add(yangYinStartButton , yangYinSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
+abyssSettingsObjects.add(yangYinThemesButton , yinYangThemesButtonText , yangYinBackButton , yinYangBackButtonText , yangYinFactoryResetButton , yinYangFactoryResetButtonText)
+abyssThemesObjects.add(yangYinClassicButton , yangYinYinYangButton , yangYinYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , yangYinInvertedButton , yinYangInvertedButtonText , yangYinInvertedishButton , yinYangInvertedishButtonText , yangYinClassicishButton , yinYangClassicishButtonText , yangYinAbyssButton , yinYangAbyssButtonText , yangYinBackButton , yinYangBackButtonText)
+abyssGameObjects.add(yangYinDotButton , yangYinDotCounter , yangYinBackButton , yinYangBackButtonText)
 programRunning = True
 while programRunning:
     if level == "Menu":
@@ -254,6 +276,14 @@ while programRunning:
             screen.fill((0 , 255 , 0))
             for object in invertedishMenuObjects:
                 screen.blit(object.surface , object.rect)
+        elif theme == "Inverted":
+            screen.fill((0 , 255 , 0))
+            for object in invertedMenuObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Abyss":
+            screen.fill((0 , 0 , 0))
+            for object in abyssMenuObjects:
+                screen.blit(object.surface , object.rect)
         mouseX , mouseY = py.mouse.get_pos()
         py.display.flip()
     elif level == "Settings":
@@ -266,6 +296,21 @@ while programRunning:
             if event.type == py.MOUSEBUTTONDOWN:
                 if mouseX > classicThemesButton.rect.left and mouseX < classicThemesButton.rect.right and mouseY > classicThemesButton.rect.top and mouseY < classicThemesButton.rect.bottom:
                     level = "Themes"
+                if mouseX > classicFactoryResetButton.rect.left and mouseX < classicFactoryResetButton.rect.right and mouseY > classicFactoryResetButton.rect.top and mouseY < classicFactoryResetButton.rect.bottom:
+                    choice = ms.askquestion("Factory Reset" , "Are you sure you want to initiate a factory reset? This resets every stat in game, thus making it like you just started playing.")
+                    if choice == "Yes":
+                        secondChoice = ms.askquestion("Factory Reset" , "You have chosen wrongly. I'll give you a second chance. Do you want to cancel?")
+                        if secondChoice == "Yes":
+                            ms.showinfo("Factory Reset" , "Sadly, you will now start all over again. This is why I didn't mention the second option in the Settings.")
+                            dotValue = 0
+                            clickValue = 0
+                            clickUpgradeValue = 0
+                            prestigeValue = 0
+                            stageValue = 0
+                        else:
+                            ms.showinfo("Cancellation" , "That was a good choice you made at the last second.")
+                    else:
+                        ms.showinfo("Cancellation" , "Good choice.")
                 if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                     level = "Menu"
         if theme == "Classic":
@@ -288,6 +333,14 @@ while programRunning:
             screen.fill((0 , 255 , 0))
             for object in invertedishSettingsObjects:
                 screen.blit(object.surface , object.rect)
+        elif theme == "Inverted":
+            screen.fill((0 , 255 , 0))
+            for object in invertedSettingsObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Abyss":
+            screen.fill((0 , 0 , 0))
+            for object in abyssSettingsObjects:
+                screen.blit(object.surface , object.rect)
         mouseX , mouseY = py.mouse.get_pos()
         py.display.flip()
     elif level == "Themes":
@@ -308,6 +361,10 @@ while programRunning:
                     theme = "Classicish"
                 if mouseX > classicInvertedishButton.rect.left and mouseX < classicInvertedishButton.rect.right and mouseY > classicInvertedishButton.rect.top and mouseY < classicInvertedishButton.rect.bottom:
                     theme = "Invertedish"
+                if mouseX > classicInvertedButton.rect.left and mouseX < classicInvertedButton.rect.right and mouseY > classicInvertedButton.rect.top and mouseY < classicInvertedButton.rect.bottom:
+                    theme = "Inverted"
+                if mouseX > classicAbyssButton.rect.left and mouseX < classicAbyssButton.rect.right and mouseY > classicAbyssButton.rect.top and mouseY < classicAbyssButton.rect.bottom:
+                    theme = "Abyss"
                 if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                     level = "Settings"
         if theme == "Classic":
@@ -329,6 +386,14 @@ while programRunning:
         elif theme == "Invertedish":
             screen.fill((0 , 255 , 0))
             for object in invertedishThemesObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Inverted":
+            screen.fill((0 , 255 , 0))
+            for object in invertedThemesObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Abyss":
+            screen.fill((0 , 0 , 0))
+            for object in abyssThemesObjects:
                 screen.blit(object.surface , object.rect)
         mouseX , mouseY = py.mouse.get_pos()
         py.display.flip()
@@ -425,6 +490,12 @@ while programRunning:
         elif theme == "Invertedish":
             screen.fill((0 , 255 , 0))
             invertedishGameObjects.remove(classicDotCounter)
+        elif theme == "Inverted":
+            screen.fill((0 , 255 , 0))
+            invertedGameObjects.remove(yangYinDotCounter)
+        elif theme == "Abyss":
+            screen.fill((0 , 0 , 0))
+            abyssGameObjects.remove(yangYinDotCounter)
         mouseX , mouseY = py.mouse.get_pos()
         upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - dotValue
         prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - dotValue
@@ -490,5 +561,25 @@ while programRunning:
                 screen.blit(invertedishPrestigeButton.surface , invertedishPrestigeButton.rect)
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(invertedishStagePrestigeButton.surface , invertedishStagePrestigeButton.rect)
+        elif theme == "Inverted":
+            invertedGameObjects.add(yangYinDotCounter)
+            for object in invertedGameObjects:
+                screen.blit(object.surface , object.rect)
+            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+                screen.blit(invertedishClickUpgradeButton.surface , invertedishClickUpgradeButton.rect)
+            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+                screen.blit(invertedishPrestigeButton.surface , invertedishPrestigeButton.rect)
+            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+                screen.blit(invertedishStagePrestigeButton.surface , invertedishStagePrestigeButton.rect)
+        elif theme == "Abyss":
+            abyssGameObjects.add(yangYinDotCounter)
+            for object in abyssGameObjects:
+                screen.blit(object.surface , object.rect)
+            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+                screen.blit(yangYinClickUpgradeButton.surface , yangYinClickUpgradeButton.rect)
+            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+                screen.blit(yangYinPrestigeButton.surface , yangYinPrestigeButton.rect)
+            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+                screen.blit(yangYinStagePrestigeButton.surface , yangYinStagePrestigeButton.rect)
         py.display.flip()
 py.quit()
