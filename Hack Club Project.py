@@ -103,7 +103,7 @@ classicStagePrestigeButton = Button(30 , 30 , 250 , 310 , (0 , 255 , 20))
 classicStartButton = Button(110 , 60 , 250 , 220 , (0 , 200 , 255))
 classicThemesButton = Button(105 , 30 , 250 , 250 , (0 , 200 , 255))
 classicInvertedButton = Button(138 , 38 , 250 , 130 , (0 , 200 , 255))
-classicInvertedishButton = Button(138 , 38 , 250 , 170 , (0 , 200 , 255))
+classicInvertedishButton = Button(170 , 38 , 250 , 170 , (0 , 200 , 255))
 classicYangYinButton = Button(138 , 38 , 250 , 210 , (0 , 200 , 255))
 classicClassicButton = Button(110 , 38 , 250 , 250 , (0 , 200 , 255))
 classicYinYangButton = Button(138 , 38 , 250 , 290 , (0 , 200 , 255))
@@ -111,18 +111,18 @@ classicClassicishButton = Button(160 , 38 , 250 , 330 , (0 , 200 , 255))
 classicAbyssButton = Button(160 , 38 , 250 , 370 , (0 , 200 , 255))
 classicBackButton = Button(78 , 33  , 55 , 35 , (0 , 200 , 255))
 classicSettingsButton = Button(110 , 30 , 250 , 270 , (0 , 200 , 255))
-classicInvertedButtonText = Text("Inverted" , 250 , 130 , (0 , 200 , 255) , 30)
-classicInvertedishButtonText = Text("Invertedish" , 250 , 170 , (0 , 200 , 255) , 30)
+classicInvertedButtonText = Text("Inverted" , 250 , 130 , (255 , 255 , 255) , 30)
+classicInvertedishButtonText = Text("Invertedish" , 250 , 170 , (255 , 255 , 255) , 30)
 classicYangYinButtonText = Text("Yang Yin" , 250 , 210 , (255 , 255 , 255) , 30)
 classicClassicButtonText = Text("Classic" , 250 , 250 , (255 , 255 , 255) , 30)
 classicYinYangButtonText = Text("Yin Yang" , 250 , 290 , (255 , 255 , 255) , 30)
-classicClassicishButtonText = Text("Classicish" , 250 , 330 , (0 , 200 , 255) , 30)
-classicAbyssButtonText = Text("Abyss" , 250 , 370 , (0 , 200 , 255) , 30)
+classicClassicishButtonText = Text("Classicish" , 250 , 330 , (255 , 255 , 255) , 30)
+classicAbyssButtonText = Text("Abyss" , 250 , 370 , (255 , 255 , 255) , 30)
 classicBackButtonText = Text("Back" , 55 , 35 , (255 , 255 , 255) , 30)
 classicStartButtonText = Text("Play" , 250 , 218 , (255 , 255 , 255) , 50)
 classicThemesButtonText = Text("Themes" , 250 , 250 , (255 , 255 , 255) , 25)
 classicSettingsButtonText = Text("Settings" , 250 , 270 , (255 , 255 , 255) , 25)
-classicDotCounter = Text(dotCount , 410 , 20 , (255 , 255 , 255) , 25)
+classicDotCounter = Text(dotCount , 410 , 35 , (255 , 255 , 255) , 25)
 classicMenuObjects = py.sprite.Group()
 classicSettingsObjects = py.sprite.Group()
 classicThemesObjects = py.sprite.Group()
@@ -171,9 +171,13 @@ yangYinPrestigeButton = yinYang(classicPrestigeButton , True)
 yangYinStagePrestigeButton = yinYang(classicStagePrestigeButton , True)
 yangYinStartButton = yinYang(classicStartButton , True)
 yangYinThemesButton = yinYang(classicThemesButton , True)
+yangYinInvertedButton = yinYang(classicInvertedButton , True)
+yangYinInvertedishButton = yinYang(classicInvertedishButton , True)
 yangYinYangYinButton = yinYang(classicYangYinButton , True)
 yangYinClassicButton = yinYang(classicClassicButton , True)
 yangYinYinYangButton = yinYang(classicYinYangButton , True)
+yangYinClassicishButton = yinYang(classicClassicishButton , True)
+yangYinAbyssButton = yinYang(classicAbyssButton , True)
 yangYinBackButton = yinYang(classicBackButton , True)
 yangYinSettingsButton = yinYang(classicSettingsButton , True)
 yangYinDotCounter = yinYang(classicDotCounter , True)
@@ -183,7 +187,7 @@ yangYinThemesObjects = py.sprite.Group()
 yangYinGameObjects = py.sprite.Group()
 yangYinMenuObjects.add(yangYinStartButton , yangYinSettingsButton , classicSettingsButtonText , classicStartButtonText)
 yangYinSettingsObjects.add(yangYinThemesButton , classicThemesButtonText , yangYinBackButton , classicBackButtonText)
-yangYinThemesObjects.add(yangYinClassicButton , classicClassicButtonText , yangYinYinYangButton , classicYinYangButtonText , yangYinYangYinButton , classicYangYinButtonText , yangYinBackButton , classicBackButtonText)
+yangYinThemesObjects.add(yangYinClassicButton , classicClassicButtonText , yangYinYinYangButton , classicYinYangButtonText , yangYinYangYinButton , classicYangYinButtonText , yangYinBackButton , classicBackButtonText , yangYinInvertedButton , classicInvertedButtonText , yangYinInvertedishButton , classicInvertedishButtonText , yangYinClassicishButton , classicClassicishButtonText , yangYinAbyssButton , classicAbyssButtonText)
 yangYinGameObjects.add(yangYinDotButton , yangYinDotCounter , yangYinBackButton , classicBackButtonText)
 classicishMenuObjects = py.sprite.Group()
 classicishSettingsObjects = py.sprite.Group()
@@ -191,11 +195,33 @@ classicishThemesObjects = py.sprite.Group()
 classicishGameObjects = py.sprite.Group()
 classicishMenuObjects.add(classicStartButton , classicSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
 classicishSettingsObjects.add(classicThemesButton , yinYangThemesButtonText , classicBackButton , yinYangBackButtonText)
-classicishThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , classicBackButton , yinYangBackButtonText)
+classicishThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , classicBackButton , yinYangBackButtonText , classicInvertedButton , yinYangInvertedButtonText , classicInvertedishButton , yinYangInvertedishButtonText , classicClassicishButton , yinYangClassicishButtonText , classicAbyssButton , yinYangAbyssButtonText)
 classicishGameObjects.add(classicDotButton , yangYinDotCounter , classicBackButton , yinYangBackButtonText)
+invertedishDotButton = Button(30 , 30 , 250 , 190 , (255 , 55 , 0))
+invertedishClickUpgradeButton = Button(30 , 30 , 250 , 230 , (55 , 0 , 255))
+invertedishPrestigeButton = Button(30 , 30 , 250 , 270 , (0 , 255 , 255))
+invertedishStagePrestigeButton = Button(30 , 30 , 250 , 310 , (255 , 0 , 235))
+invertedishStartButton = Button(110 , 60 , 250 , 220 , (255 , 55 , 0))
+invertedishThemesButton = Button(105 , 30 , 250 , 250 , (255 , 55 , 0))
+invertedishInvertedButton = Button(138 , 38 , 250 , 130 , (255 , 55 , 0))
+invertedishInvertedishButton = Button(170 , 38 , 250 , 170 , (255 , 55 , 0))
+invertedishYangYinButton = Button(138 , 38 , 250 , 210 , (255 , 55 , 0))
+invertedishClassicButton = Button(110 , 38 , 250 , 250 , (255 , 55 , 0))
+invertedishYinYangButton = Button(138 , 38 , 250 , 290 , (255 , 55 , 0))
+invertedishClassicishButton = Button(160 , 38 , 250 , 330 , (255 , 55 , 0))
+invertedishAbyssButton = Button(160 , 38 , 250 , 370 , (255 , 55 , 0))
+invertedishBackButton = Button(78 , 33  , 55 , 35 , (255 , 55 , 0))
+invertedishSettingsButton = Button(110 , 30 , 250 , 270 , (255 , 55 , 0))
+invertedishMenuObjects = py.sprite.Group()
+invertedishSettingsObjects = py.sprite.Group()
+invertedishThemesObjects = py.sprite.Group()
+invertedishGameObjects = py.sprite.Group()
+invertedishMenuObjects.add(invertedishStartButton , invertedishSettingsButton , classicStartButtonText , classicSettingsButtonText)
+invertedishSettingsObjects.add(invertedishThemesButton , classicThemesButtonText , invertedishBackButton , classicBackButtonText)
+invertedishThemesObjects.add(invertedishClassicButton , invertedishYinYangButton , invertedishYangYinButton , classicClassicButtonText , classicYinYangButtonText , classicYangYinButtonText , invertedishInvertedButton , classicInvertedButtonText , invertedishInvertedishButton , classicInvertedishButtonText , invertedishClassicishButton , classicClassicishButtonText , invertedishAbyssButton , classicAbyssButtonText , invertedishBackButton , classicBackButtonText)
+invertedishGameObjects.add(invertedishDotButton , classicDotCounter , invertedishBackButton , classicBackButtonText)
 programRunning = True
 while programRunning:
-    print(level)
     if level == "Menu":
         if welcomeMessage == False:
             welcomeMessage = True
@@ -219,6 +245,14 @@ while programRunning:
         elif theme == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinMenuObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Classicish":
+            screen.fill((255 , 0 , 255))
+            for object in classicishMenuObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Invertedish":
+            screen.fill((0 , 255 , 0))
+            for object in invertedishMenuObjects:
                 screen.blit(object.surface , object.rect)
         mouseX , mouseY = py.mouse.get_pos()
         py.display.flip()
@@ -246,6 +280,14 @@ while programRunning:
             screen.fill((255 , 255 , 255))
             for object in yangYinSettingsObjects:
                 screen.blit(object.surface , object.rect)
+        elif theme == "Classicish":
+            screen.fill((255 , 0 , 255))
+            for object in classicishSettingsObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Invertedish":
+            screen.fill((0 , 255 , 0))
+            for object in invertedishSettingsObjects:
+                screen.blit(object.surface , object.rect)
         mouseX , mouseY = py.mouse.get_pos()
         py.display.flip()
     elif level == "Themes":
@@ -262,6 +304,10 @@ while programRunning:
                     theme = "Yin Yang"
                 if mouseX > classicYangYinButton.rect.left and mouseX < classicYangYinButton.rect.right and mouseY > classicYangYinButton.rect.top and mouseY < classicYangYinButton.rect.bottom:
                     theme = "Yang Yin"
+                if mouseX > classicClassicishButton.rect.left and mouseX < classicClassicishButton.rect.right and mouseY > classicClassicishButton.rect.top and mouseY < classicClassicishButton.rect.bottom:
+                    theme = "Classicish"
+                if mouseX > classicInvertedishButton.rect.left and mouseX < classicInvertedishButton.rect.right and mouseY > classicInvertedishButton.rect.top and mouseY < classicInvertedishButton.rect.bottom:
+                    theme = "Invertedish"
                 if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                     level = "Settings"
         if theme == "Classic":
@@ -275,6 +321,14 @@ while programRunning:
         elif theme == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinThemesObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Classicish":
+            screen.fill((255 , 0 , 255))
+            for object in classicishThemesObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Invertedish":
+            screen.fill((0 , 255 , 0))
+            for object in invertedishThemesObjects:
                 screen.blit(object.surface , object.rect)
         mouseX , mouseY = py.mouse.get_pos()
         py.display.flip()
@@ -358,10 +412,19 @@ while programRunning:
             ms.showinfo("Stage 5" , "By now, you must have guessed what will be automated next. The next time I see you, there will be something different...")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
+            classicGameObjects.remove(classicDotCounter)
         elif theme == "Yin Yang":
             screen.fill((0 , 0 , 0))
+            yinYangGameObjects.remove(classicDotCounter)
         elif theme == "Yang Yin":
             screen.fill((255 , 255 , 255))
+            yangYinGameObjects.remove(yangYinDotCounter)
+        elif theme == "Classicish":
+            screen.fill((255 , 0 , 255))
+            classicishGameObjects.remove(yangYinDotCounter)
+        elif theme == "Invertedish":
+            screen.fill((0 , 255 , 0))
+            invertedishGameObjects.remove(classicDotCounter)
         mouseX , mouseY = py.mouse.get_pos()
         upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - dotValue
         prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - dotValue
@@ -374,11 +437,11 @@ while programRunning:
         upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade" , True)
         prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige" , True)
         stagePrestigeRequirementCount = append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and " , True) + append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige" , True) 
-        classicDotCounter = Text(dotCount , 410 , 20 , (255 , 255 , 255) , 25)
-        yinYangDotCounter = yinYang(classicDotCounter , False)
+        classicDotCounter = Text(dotCount , 410 , 35 , (255 , 255 , 255) , 25)
         yangYinDotCounter = yinYang(classicDotCounter , True)
         statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
         if theme == "Classic":
+            classicGameObjects.add(classicDotCounter)
             for object in classicGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
@@ -388,6 +451,7 @@ while programRunning:
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(classicStagePrestigeButton.surface , classicStagePrestigeButton.rect)
         elif theme == "Yin Yang":
+            yinYangGameObjects.add(classicDotCounter)
             for object in yinYangGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
@@ -397,6 +461,7 @@ while programRunning:
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(yinYangStagePrestigeButton.surface , yinYangStagePrestigeButton.rect)
         elif theme == "Yang Yin":
+            yangYinGameObjects.add(yangYinDotCounter)
             for object in yangYinGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
@@ -405,5 +470,25 @@ while programRunning:
                 screen.blit(yangYinPrestigeButton.surface , yangYinPrestigeButton.rect)
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(yangYinStagePrestigeButton.surface , yangYinStagePrestigeButton.rect)
+        elif theme == "Classicish":
+            classicishGameObjects.add(yangYinDotCounter)
+            for object in classicishGameObjects:
+                screen.blit(object.surface , object.rect)
+            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+                screen.blit(classicClickUpgradeButton.surface , classicClickUpgradeButton.rect)
+            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+                screen.blit(classicPrestigeButton.surface , classicPrestigeButton.rect)
+            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+                screen.blit(classicStagePrestigeButton.surface , classicStagePrestigeButton.rect)
+        elif theme == "Invertedish":
+            invertedishGameObjects.add(classicDotCounter)
+            for object in invertedishGameObjects:
+                screen.blit(object.surface , object.rect)
+            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+                screen.blit(invertedishClickUpgradeButton.surface , invertedishClickUpgradeButton.rect)
+            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+                screen.blit(invertedishPrestigeButton.surface , invertedishPrestigeButton.rect)
+            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+                screen.blit(invertedishStagePrestigeButton.surface , invertedishStagePrestigeButton.rect)
         py.display.flip()
 py.quit()
