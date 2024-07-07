@@ -1,6 +1,7 @@
 import pygame as py
 from tkinter import messagebox as ms
 py.init()
+py.mixer.init()
 class Button(py.sprite.Sprite):
     def __init__(self , width , height , xPosition , yPosition , colour):
         super().__init__()
@@ -247,14 +248,23 @@ while programRunning:
     if level == "Menu":
         if welcomeMessage == False:
             welcomeMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Welcome" , "Hello! This is the Menu. You can select your theme first, or go straight into the gameplay. See you there!")
         for event in py.event.get():
             if event.type == py.QUIT:
                 programRunning = False
             if event.type == py.MOUSEBUTTONDOWN:
                 if mouseX > classicStartButton.rect.left and mouseX < classicStartButton.rect.right and mouseY > classicStartButton.rect.top and mouseY < classicStartButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     level = "Game"
                 if mouseX > classicSettingsButton.rect.left and mouseX < classicSettingsButton.rect.right and mouseY > classicSettingsButton.rect.top and mouseY < classicSettingsButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     level = "Settings"
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
@@ -289,29 +299,59 @@ while programRunning:
     elif level == "Settings":
         if settingsMessage == False:
             settingsMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Settings" , "Hello! This is Settings. You can select your theme first, and go into the gameplay. See you there!")
         for event in py.event.get():
             if event.type == py.QUIT:
                 programRunning = False
             if event.type == py.MOUSEBUTTONDOWN:
+                py.mixer.music.load("Click.wav")
+                py.mixer.music.set_volume(0.4)
+                py.mixer.music.play()
                 if mouseX > classicThemesButton.rect.left and mouseX < classicThemesButton.rect.right and mouseY > classicThemesButton.rect.top and mouseY < classicThemesButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     level = "Themes"
                 if mouseX > classicFactoryResetButton.rect.left and mouseX < classicFactoryResetButton.rect.right and mouseY > classicFactoryResetButton.rect.top and mouseY < classicFactoryResetButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
+                    py.mixer.music.load("Message.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     choice = ms.askquestion("Factory Reset" , "Are you sure you want to initiate a factory reset? This resets every stat in game, thus making it like you just started playing.")
-                    if choice == "Yes":
+                    if choice == "yes":
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
                         secondChoice = ms.askquestion("Factory Reset" , "You have chosen wrongly. I'll give you a second chance. Do you want to cancel?")
-                        if secondChoice == "Yes":
+                        if secondChoice == "no":
+                            py.mixer.music.load("Message.wav")
+                            py.mixer.music.set_volume(0.4)
+                            py.mixer.music.play()
                             ms.showinfo("Factory Reset" , "Sadly, you will now start all over again. This is why I didn't mention the second option in the Settings.")
                             dotValue = 0
-                            clickValue = 0
+                            clickValue = 1
                             clickUpgradeValue = 0
                             prestigeValue = 0
-                            stageValue = 0
+                            stageValue = 1
                         else:
+                            py.mixer.music.load("Message.wav")
+                            py.mixer.music.set_volume(0.4)
+                            py.mixer.music.play()
                             ms.showinfo("Cancellation" , "That was a good choice you made at the last second.")
                     else:
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
                         ms.showinfo("Cancellation" , "Good choice.")
                 if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     level = "Menu"
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
@@ -346,26 +386,53 @@ while programRunning:
     elif level == "Themes":
         if themesMessage == False:
             themesMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Themes" , "Here you can find a few themes. The current theme, which is the default theme is Classic. Once you have chosen, you can go into the gameplay.")
         for event in py.event.get():
             if event.type == py.QUIT:
                 programRunning = False
             if event.type == py.MOUSEBUTTONDOWN:
                 if mouseX > classicClassicButton.rect.left and mouseX < classicClassicButton.rect.right and mouseY > classicClassicButton.rect.top and mouseY < classicClassicButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     theme = "Classic"
                 if mouseX > classicYinYangButton.rect.left and mouseX < classicYinYangButton.rect.right and mouseY > classicYinYangButton.rect.top and mouseY < classicYinYangButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     theme = "Yin Yang"
                 if mouseX > classicYangYinButton.rect.left and mouseX < classicYangYinButton.rect.right and mouseY > classicYangYinButton.rect.top and mouseY < classicYangYinButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     theme = "Yang Yin"
                 if mouseX > classicClassicishButton.rect.left and mouseX < classicClassicishButton.rect.right and mouseY > classicClassicishButton.rect.top and mouseY < classicClassicishButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     theme = "Classicish"
                 if mouseX > classicInvertedishButton.rect.left and mouseX < classicInvertedishButton.rect.right and mouseY > classicInvertedishButton.rect.top and mouseY < classicInvertedishButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     theme = "Invertedish"
                 if mouseX > classicInvertedButton.rect.left and mouseX < classicInvertedButton.rect.right and mouseY > classicInvertedButton.rect.top and mouseY < classicInvertedButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     theme = "Inverted"
                 if mouseX > classicAbyssButton.rect.left and mouseX < classicAbyssButton.rect.right and mouseY > classicAbyssButton.rect.top and mouseY < classicAbyssButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     theme = "Abyss"
                 if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     level = "Settings"
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
@@ -400,27 +467,51 @@ while programRunning:
     elif level == "Game":
         if tutorialMessage == False:
             tutorialMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Tutorial" , "Hello! This is a minimalistic cookie clicker made for the Hack Club Arcade.")
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Tutorial" , "For now, you have to collect as many dots as possible.")
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Tutorial" , "That blue button you'll see shortly increments the amount of dots you have by 1 every time you press it.")
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Info" , "You can navigate to the Themes area again to change your theme once more.")
         for event in py.event.get():
             if event.type == py.QUIT:
                 programRunning = False
             if event.type == py.MOUSEBUTTONDOWN:
                 if mouseX > classicDotButton.rect.left and mouseX < classicDotButton.rect.right and mouseY > classicDotButton.rect.top and mouseY < classicDotButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     dotValue = dotValue + clickValue
                 if mouseX > classicClickUpgradeButton.rect.left and mouseX < classicClickUpgradeButton.rect.right and mouseY > classicClickUpgradeButton.rect.top and mouseY < classicClickUpgradeButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                         clickValue = (clickValue + 1) * (prestigeValue + 1)
                         clickUpgradeValue = clickUpgradeValue + 1
                 if mouseX > classicPrestigeButton.rect.left and mouseX < classicPrestigeButton.rect.right and mouseY > classicPrestigeButton.rect.top and mouseY < classicPrestigeButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                         prestigeValue = prestigeValue + 1
                         dotValue = 0
                         clickValue = 1
                         clickUpgradeValue = 0
                 if mouseX > classicStagePrestigeButton.rect.left and mouseX < classicStagePrestigeButton.rect.right and mouseY > classicStagePrestigeButton.rect.top and mouseY < classicStagePrestigeButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                         stageValue = stageValue + 1
                         prestigeValue = 0
@@ -428,9 +519,15 @@ while programRunning:
                         clickValue = 1
                         clickUpgradeValue = 0
                 if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                    py.mixer.music.load("Click.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     level = "Menu"
             if event.type == py.KEYDOWN:
                 if event.key == py.K_SPACE:
+                    py.mixer.music.load("Message.wav")
+                    py.mixer.music.set_volume(0.4)
+                    py.mixer.music.play()
                     ms.showinfo("Statistics" , statistics)
             if event.type == IDLEDOTGAIN:
                 if stageValue > 1:
@@ -452,28 +549,55 @@ while programRunning:
                         clickUpgradeValue = 0
         if dotValue > 0 and firstDotMessage == False:
             firstDotMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Starting Off" , "You've gained your first dot. You can earn more, and once you have a substantial amount, you'll get another message like this one.")
         if dotValue > 100 and firstUpgradeMessage == False:
             firstUpgradeMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Upgrades" , "You've reached your first upgrade. When you press that yellow button that you will see shortly, your Dots Per Click (DPC) value will increment by one. This changes how many dots you earn per click.")
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Statistics" , "To see some statistics, you can press the Space key on your keyboard.")
         if dotValue > 11250 and firstPrestigeMessage == False:
             firstPrestigeMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Prestiges" , "You have reached the point where you can undergo your first prestige. When you press the red button that you will see shortly, you will prestige. This means that all of your statistics, including your dots and DPC will be reset to 0 and 1 respectively. Things like how many times you have prestiged will be incremented by one of course, and your stage (you'll learn about that later) will stay the same. Although this seems purely negative, the rate at which your DPC increments will be vastly different (positively), and you will reach more and more dot counts.")
         if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) and firstStagePrestigeMessage == False:
             firstStagePrestigeMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Stage Prestiges" , "After a long time, you have reached your first stage prestige. Stage prestiges reset everything that prestiges do, as well as your prestige count. On the other hand, your stage increments by one. A stage prestige always automates some part of the game that hasn't been automated before, eventualy allowing full idle gameplay. You can stage prestige by pressing the green button that you will se shortly. There is a suprise in Stage 2.")
         if stageValue > 1 and stageTwoMessage == False:
             stageTwoMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Stage 2" , "This is the second Stage. As promised, once you progress after reading this message, a part of the game will be automated. Good luck.")
         if stageValue > 2 and stageThreeMessage == False:
             stageThreeMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Stage 3" , "You should have gotten the gist by now. Last time, Idle Dot Gain was implemented. Now, something else will be automated. See you in Stage 4.")
         if stageValue > 3 and stageFourMessage == False:
             stageFourMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Stage 4" , "You have progressed pretty far into the game by now. In Stage 3, Idle DPC Gain was added. As promised previously, something else will be automated. If you make it to Stage 5, see you there.")
         if stageValue > 4 and stageFiveMessage == False:
             stageFiveMessage = True
+            py.mixer.music.load("Message.wav")
+            py.mixer.music.set_volume(0.4)
+            py.mixer.music.play()
             ms.showinfo("Stage 5" , "By now, you must have guessed what will be automated next. The next time I see you, there will be something different...")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
