@@ -103,7 +103,7 @@ classicClickUpgradeButton = Button(30 , 30 , 250 , 230 , (200 , 255 , 0))
 classicPrestigeButton = Button(30 , 30 , 250 , 270 , (255 , 0 , 0))
 classicStagePrestigeButton = Button(30 , 30 , 250 , 310 , (0 , 255 , 20))
 classicStartButton = Button(110 , 60 , 250 , 220 , (0 , 200 , 255))
-classicThemesButton = Button(105 , 30 , 250 , 233 , (0 , 200 , 255))
+classicThemesButton = Button(105 , 30 , 250 , 250 , (0 , 200 , 255))
 classicInvertedButton = Button(138 , 38 , 250 , 130 , (0 , 200 , 255))
 classicInvertedishButton = Button(170 , 38 , 250 , 170 , (0 , 200 , 255))
 classicYangYinButton = Button(138 , 38 , 250 , 210 , (0 , 200 , 255))
@@ -113,7 +113,8 @@ classicClassicishButton = Button(160 , 38 , 250 , 330 , (0 , 200 , 255))
 classicAbyssButton = Button(160 , 38 , 250 , 370 , (0 , 200 , 255))
 classicBackButton = Button(78 , 33  , 55 , 35 , (0 , 200 , 255))
 classicSettingsButton = Button(110 , 30 , 250 , 270 , (0 , 200 , 255))
-classicFactoryResetButton = Button(180 , 30 , 250 , 267 , (0 , 200 , 255))
+classicCreditsButton = Button(100 , 30 , 250 , 215 , (0 , 200 , 255))
+classicFactoryResetButton = Button(180 , 30 , 250 , 285 , (0 , 200 , 255))
 classicInvertedButtonText = Text("Inverted" , 250 , 130 , (255 , 255 , 255) , 30)
 classicInvertedishButtonText = Text("Invertedish" , 250 , 170 , (255 , 255 , 255) , 30)
 classicYangYinButtonText = Text("Yang Yin" , 250 , 210 , (255 , 255 , 255) , 30)
@@ -123,16 +124,17 @@ classicClassicishButtonText = Text("Classicish" , 250 , 330 , (255 , 255 , 255) 
 classicAbyssButtonText = Text("Abyss" , 250 , 370 , (255 , 255 , 255) , 30)
 classicBackButtonText = Text("Back" , 55 , 35 , (255 , 255 , 255) , 30)
 classicStartButtonText = Text("Play" , 250 , 218 , (255 , 255 , 255) , 50)
-classicThemesButtonText = Text("Themes" , 250 , 233 , (255 , 255 , 255) , 25)
+classicThemesButtonText = Text("Themes" , 250 , 250 , (255 , 255 , 255) , 25)
 classicSettingsButtonText = Text("Settings" , 250 , 270 , (255 , 255 , 255) , 25)
-classicFactoryResetButtonText = Text("Factory Reset" , 250 , 267 , (255 , 255 , 255) , 25)
+classicFactoryResetButtonText = Text("Factory Reset" , 250 , 285 , (255 , 255 , 255) , 25)
+classicCreditsButtonText = Text("Credits" , 250 , 215 , (255 , 255 , 255) , 25)
 classicDotCounter = Text(dotCount , 410 , 35 , (255 , 255 , 255) , 25)
 classicMenuObjects = py.sprite.Group()
 classicSettingsObjects = py.sprite.Group()
 classicThemesObjects = py.sprite.Group()
 classicGameObjects = py.sprite.Group()
 classicMenuObjects.add(classicStartButton , classicSettingsButton , classicStartButtonText , classicSettingsButtonText)
-classicSettingsObjects.add(classicThemesButton , classicThemesButtonText , classicBackButton , classicBackButtonText , classicFactoryResetButton , classicFactoryResetButtonText)
+classicSettingsObjects.add(classicThemesButton , classicThemesButtonText , classicBackButton , classicBackButtonText , classicFactoryResetButton , classicFactoryResetButtonText , classicCreditsButton , classicCreditsButtonText)
 classicThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , classicClassicButtonText , classicYinYangButtonText , classicYangYinButtonText , classicInvertedButton , classicInvertedButtonText , classicInvertedishButton , classicInvertedishButtonText , classicClassicishButton , classicClassicishButtonText , classicAbyssButton , classicAbyssButtonText , classicBackButton , classicBackButtonText)
 classicGameObjects.add(classicDotButton , classicDotCounter , classicBackButton , classicBackButtonText)
 yinYangDotButton = yinYang(classicDotButton , False)
@@ -146,6 +148,7 @@ yinYangInvertedButton = yinYang(classicInvertedButton , False)
 yinYangInvertedishButton = yinYang(classicInvertedishButton , False)
 yinYangYangYinButton = yinYang(classicYangYinButton , False)
 yinYangClassicButton = yinYang(classicClassicButton , False)
+yinYangCreditsButton = yinYang(classicCreditsButton , False)
 yinYangYinYangButton = yinYang(classicYinYangButton , False)
 yinYangClassicishButton = yinYang(classicClassicishButton , False)
 yinYangFactoryResetButton = yinYang(classicFactoryResetButton , False)
@@ -157,6 +160,7 @@ yinYangYangYinButtonText = yinYang(classicYangYinButtonText , True)
 yinYangClassicButtonText = yinYang(classicClassicButtonText , True)
 yinYangYinYangButtonText = yinYang(classicYinYangButtonText , True)
 yinYangClassicishButtonText = yinYang(classicClassicishButtonText , True)
+yinYangCreditsButtonText = yinYang(classicCreditsButtonText , True)
 yinYangFactoryResetButtonText = yinYang(classicFactoryResetButtonText , True)
 yinYangAbyssButtonText = yinYang(classicAbyssButtonText , True)
 yinYangBackButtonText = yinYang(classicBackButtonText , True)
@@ -168,7 +172,7 @@ yinYangSettingsObjects = py.sprite.Group()
 yinYangThemesObjects = py.sprite.Group()
 yinYangGameObjects = py.sprite.Group()
 yinYangMenuObjects.add(yinYangStartButton , yinYangSettingsButton , yinYangSettingsButtonText , yinYangStartButtonText)
-yinYangSettingsObjects.add(yinYangThemesButton , yinYangThemesButtonText , yinYangBackButton , yinYangBackButtonText , yinYangFactoryResetButton , yinYangFactoryResetButtonText)
+yinYangSettingsObjects.add(yinYangThemesButton , yinYangThemesButtonText , yinYangBackButton , yinYangBackButtonText , yinYangFactoryResetButton , yinYangFactoryResetButtonText , yinYangCreditsButton , yinYangCreditsButtonText)
 yinYangThemesObjects.add(yinYangClassicButton , yinYangClassicButtonText , yinYangYangYinButton , yinYangYangYinButtonText , yinYangYinYangButton , yinYangYinYangButtonText , yinYangBackButton , yinYangBackButtonText , yinYangInvertedButton , yinYangInvertedButtonText , yinYangInvertedishButton , yinYangInvertedishButtonText , yinYangClassicishButton , yinYangClassicishButtonText , yinYangAbyssButton , yinYangAbyssButtonText)
 yinYangGameObjects.add(yinYangDotButton , classicDotCounter , yinYangBackButton , yinYangBackButtonText)
 yangYinDotButton = yinYang(classicDotButton , True)
@@ -187,13 +191,14 @@ yangYinFactoryResetButton = yinYang(classicFactoryResetButton , True)
 yangYinAbyssButton = yinYang(classicAbyssButton , True)
 yangYinBackButton = yinYang(classicBackButton , True)
 yangYinSettingsButton = yinYang(classicSettingsButton , True)
+yangYinCreditsButton = yinYang(classicCreditsButton , True)
 yangYinDotCounter = yinYang(classicDotCounter , True)
 yangYinMenuObjects = py.sprite.Group()
 yangYinSettingsObjects = py.sprite.Group()
 yangYinThemesObjects = py.sprite.Group()
 yangYinGameObjects = py.sprite.Group()
 yangYinMenuObjects.add(yangYinStartButton , yangYinSettingsButton , classicSettingsButtonText , classicStartButtonText)
-yangYinSettingsObjects.add(yangYinThemesButton , classicThemesButtonText , yangYinBackButton , classicBackButtonText , yangYinFactoryResetButton , classicFactoryResetButtonText)
+yangYinSettingsObjects.add(yangYinThemesButton , classicThemesButtonText , yangYinBackButton , classicBackButtonText , yangYinFactoryResetButton , classicFactoryResetButtonText , yangYinCreditsButton , classicCreditsButtonText)
 yangYinThemesObjects.add(yangYinClassicButton , classicClassicButtonText , yangYinYinYangButton , classicYinYangButtonText , yangYinYangYinButton , classicYangYinButtonText , yangYinBackButton , classicBackButtonText , yangYinInvertedButton , classicInvertedButtonText , yangYinInvertedishButton , classicInvertedishButtonText , yangYinClassicishButton , classicClassicishButtonText , yangYinAbyssButton , classicAbyssButtonText)
 yangYinGameObjects.add(yangYinDotButton , yangYinDotCounter , yangYinBackButton , classicBackButtonText)
 classicishMenuObjects = py.sprite.Group()
@@ -201,7 +206,7 @@ classicishSettingsObjects = py.sprite.Group()
 classicishThemesObjects = py.sprite.Group()
 classicishGameObjects = py.sprite.Group()
 classicishMenuObjects.add(classicStartButton , classicSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
-classicishSettingsObjects.add(classicThemesButton , yinYangThemesButtonText , classicBackButton , yinYangBackButtonText , classicFactoryResetButton , yinYangFactoryResetButtonText)
+classicishSettingsObjects.add(classicThemesButton , yinYangThemesButtonText , classicBackButton , yinYangBackButtonText , classicFactoryResetButton , yinYangFactoryResetButtonText , classicCreditsButton , yinYangCreditsButtonText)
 classicishThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , classicBackButton , yinYangBackButtonText , classicInvertedButton , yinYangInvertedButtonText , classicInvertedishButton , yinYangInvertedishButtonText , classicClassicishButton , yinYangClassicishButtonText , classicAbyssButton , yinYangAbyssButtonText)
 classicishGameObjects.add(classicDotButton , yangYinDotCounter , classicBackButton , yinYangBackButtonText)
 invertedishDotButton = Button(30 , 30 , 250 , 190 , (255 , 55 , 0))
@@ -209,10 +214,11 @@ invertedishClickUpgradeButton = Button(30 , 30 , 250 , 230 , (55 , 0 , 255))
 invertedishPrestigeButton = Button(30 , 30 , 250 , 270 , (0 , 255 , 255))
 invertedishStagePrestigeButton = Button(30 , 30 , 250 , 310 , (255 , 0 , 235))
 invertedishStartButton = Button(110 , 60 , 250 , 220 , (255 , 55 , 0))
-invertedishThemesButton = Button(105 , 30 , 250 , 233 , (255 , 55 , 0))
+invertedishThemesButton = Button(105 , 30 , 250 , 250 , (255 , 55 , 0))
 invertedishInvertedButton = Button(138 , 38 , 250 , 130 , (255 , 55 , 0))
 invertedishInvertedishButton = Button(170 , 38 , 250 , 170 , (255 , 55 , 0))
-invertedishFactoryResetButton = Button(180 , 30 , 250 , 267 , (255 , 55 , 0))
+invertedishFactoryResetButton = Button(180 , 30 , 250 , 285 , (255 , 55 , 0))
+invertedCreditsButton = Button(138 , 30 , 250 , 215 , (255 , 55 , 0))
 invertedishYangYinButton = Button(138 , 38 , 250 , 210 , (255 , 55 , 0))
 invertedishClassicButton = Button(110 , 38 , 250 , 250 , (255 , 55 , 0))
 invertedishYinYangButton = Button(138 , 38 , 250 , 290 , (255 , 55 , 0))
@@ -225,7 +231,7 @@ invertedishSettingsObjects = py.sprite.Group()
 invertedishThemesObjects = py.sprite.Group()
 invertedishGameObjects = py.sprite.Group()
 invertedishMenuObjects.add(invertedishStartButton , invertedishSettingsButton , classicStartButtonText , classicSettingsButtonText)
-invertedishSettingsObjects.add(invertedishThemesButton , classicThemesButtonText , invertedishBackButton , classicBackButtonText , invertedishFactoryResetButton , classicFactoryResetButtonText)
+invertedishSettingsObjects.add(invertedishThemesButton , classicThemesButtonText , invertedishBackButton , classicBackButtonText , invertedishFactoryResetButton , classicFactoryResetButtonText , invertedCreditsButton , classicCreditsButtonText)
 invertedishThemesObjects.add(invertedishClassicButton , invertedishYinYangButton , invertedishYangYinButton , classicClassicButtonText , classicYinYangButtonText , classicYangYinButtonText , invertedishInvertedButton , classicInvertedButtonText , invertedishInvertedishButton , classicInvertedishButtonText , invertedishClassicishButton , classicClassicishButtonText , invertedishAbyssButton , classicAbyssButtonText , invertedishBackButton , classicBackButtonText)
 invertedishGameObjects.add(invertedishDotButton , classicDotCounter , invertedishBackButton , classicBackButtonText)
 invertedMenuObjects = py.sprite.Group()
@@ -233,7 +239,7 @@ invertedSettingsObjects = py.sprite.Group()
 invertedThemesObjects = py.sprite.Group()
 invertedGameObjects = py.sprite.Group()
 invertedMenuObjects.add(invertedishStartButton , invertedishSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
-invertedSettingsObjects.add(invertedishThemesButton , yinYangThemesButtonText , invertedishBackButton , yinYangBackButtonText , invertedishFactoryResetButton , yinYangFactoryResetButtonText)
+invertedSettingsObjects.add(invertedishThemesButton , yinYangThemesButtonText , invertedishBackButton , yinYangBackButtonText , invertedishFactoryResetButton , yinYangFactoryResetButtonText , invertedCreditsButton , yinYangCreditsButtonText)
 invertedThemesObjects.add(invertedishClassicButton , invertedishYinYangButton , invertedishYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , invertedishInvertedButton , yinYangInvertedButtonText , invertedishInvertedishButton , yinYangInvertedishButtonText , invertedishClassicishButton , yinYangClassicishButtonText , invertedishAbyssButton , yinYangAbyssButtonText , invertedishBackButton , yinYangBackButtonText)
 invertedGameObjects.add(invertedishDotButton , yangYinDotCounter , invertedishBackButton , yinYangBackButtonText)
 abyssMenuObjects = py.sprite.Group()
@@ -241,7 +247,7 @@ abyssSettingsObjects = py.sprite.Group()
 abyssThemesObjects = py.sprite.Group()
 abyssGameObjects = py.sprite.Group()
 abyssMenuObjects.add(yangYinStartButton , yangYinSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
-abyssSettingsObjects.add(yangYinThemesButton , yinYangThemesButtonText , yangYinBackButton , yinYangBackButtonText , yangYinFactoryResetButton , yinYangFactoryResetButtonText)
+abyssSettingsObjects.add(yangYinThemesButton , yinYangThemesButtonText , yangYinBackButton , yinYangBackButtonText , yangYinFactoryResetButton , yinYangFactoryResetButtonText , yangYinCreditsButton , yinYangCreditsButtonText)
 abyssThemesObjects.add(yangYinClassicButton , yangYinYinYangButton , yangYinYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , yangYinInvertedButton , yinYangInvertedButtonText , yangYinInvertedishButton , yinYangInvertedishButtonText , yangYinClassicishButton , yinYangClassicishButtonText , yangYinAbyssButton , yinYangAbyssButtonText , yangYinBackButton , yinYangBackButtonText)
 abyssGameObjects.add(yangYinDotButton , yangYinDotCounter , yangYinBackButton , yinYangBackButtonText)
 programRunning = True
@@ -264,7 +270,7 @@ while programRunning:
             if event.type == py.QUIT:
                 programRunning = False
             if mouseX > classicStartButton.rect.left and mouseX < classicStartButton.rect.right and mouseY > classicStartButton.rect.top and mouseY < classicStartButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -274,8 +280,8 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Game"
-            if mouseX > classicSettingsButton.rect.left and mouseX < classicSettingsButton.rect.right and mouseY > classicSettingsButton.rect.top and mouseY < classicSettingsButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicSettingsButton.rect.left and mouseX < classicSettingsButton.rect.right and mouseY > classicSettingsButton.rect.top and mouseY < classicSettingsButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -285,6 +291,8 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Settings"
+            else:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
@@ -332,7 +340,7 @@ while programRunning:
             if event.type == py.QUIT:
                 programRunning = False
             if mouseX > classicThemesButton.rect.left and mouseX < classicThemesButton.rect.right and mouseY > classicThemesButton.rect.top and mouseY < classicThemesButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -342,8 +350,19 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Themes"
-            if mouseX > classicFactoryResetButton.rect.left and mouseX < classicFactoryResetButton.rect.right and mouseY > classicFactoryResetButton.rect.top and mouseY < classicFactoryResetButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicCreditsButton.rect.left and mouseX < classicCreditsButton.rect.right and mouseY > classicCreditsButton.rect.top and mouseY < classicCreditsButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Credits"
+            elif mouseX > classicFactoryResetButton.rect.left and mouseX < classicFactoryResetButton.rect.right and mouseY > classicFactoryResetButton.rect.top and mouseY < classicFactoryResetButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -382,8 +401,8 @@ while programRunning:
                             py.mixer.music.set_volume(0.4)
                             py.mixer.music.play()
                         ms.showinfo("Cancellation" , "Good choice.")
-            if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -393,6 +412,67 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Menu"
+            else:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
+            if event.type == py.KEYDOWN:
+                if event.key == py.K_ESCAPE:
+                    if sfxBool == True:
+                        sfxBool = False
+                    elif sfxBool == False:
+                        sfxBool = True
+        if theme == "Classic":
+            screen.fill((255 , 0 , 255))
+            for object in classicSettingsObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yin Yang":
+            screen.fill((0 , 0 , 0))
+            for object in yinYangSettingsObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yang Yin":
+            screen.fill((255 , 255 , 255))
+            for object in yangYinSettingsObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Classicish":
+            screen.fill((255 , 0 , 255))
+            for object in classicishSettingsObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Invertedish":
+            screen.fill((0 , 255 , 0))
+            for object in invertedishSettingsObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Inverted":
+            screen.fill((0 , 255 , 0))
+            for object in invertedSettingsObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Abyss":
+            screen.fill((0 , 0 , 0))
+            for object in abyssSettingsObjects:
+                screen.blit(object.surface , object.rect)
+        py.display.flip()
+    elif level == "Credits":
+        if settingsMessage == False:
+            settingsMessage = True
+            if sfxBool == True:
+                py.mixer.music.load("Message.wav")
+                py.mixer.music.set_volume(0.4)
+                py.mixer.music.play()
+            ms.showinfo("Settings" , "Hello! This is Settings. You can select your theme first, and go into the gameplay. See you there!")
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                programRunning = False
+            if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Settings"
+            else:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
@@ -440,63 +520,63 @@ while programRunning:
             if event.type == py.QUIT:
                 programRunning = False
             if mouseX > classicClassicButton.rect.left and mouseX < classicClassicButton.rect.right and mouseY > classicClassicButton.rect.top and mouseY < classicClassicButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     theme = "Classic"
-            if mouseX > classicYinYangButton.rect.left and mouseX < classicYinYangButton.rect.right and mouseY > classicYinYangButton.rect.top and mouseY < classicYinYangButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicYinYangButton.rect.left and mouseX < classicYinYangButton.rect.right and mouseY > classicYinYangButton.rect.top and mouseY < classicYinYangButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     theme = "Yin Yang"
-            if mouseX > classicYangYinButton.rect.left and mouseX < classicYangYinButton.rect.right and mouseY > classicYangYinButton.rect.top and mouseY < classicYangYinButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicYangYinButton.rect.left and mouseX < classicYangYinButton.rect.right and mouseY > classicYangYinButton.rect.top and mouseY < classicYangYinButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     theme = "Yang Yin"
-            if mouseX > classicClassicishButton.rect.left and mouseX < classicClassicishButton.rect.right and mouseY > classicClassicishButton.rect.top and mouseY < classicClassicishButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicClassicishButton.rect.left and mouseX < classicClassicishButton.rect.right and mouseY > classicClassicishButton.rect.top and mouseY < classicClassicishButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     theme = "Classicish"
-            if mouseX > classicInvertedishButton.rect.left and mouseX < classicInvertedishButton.rect.right and mouseY > classicInvertedishButton.rect.top and mouseY < classicInvertedishButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicInvertedishButton.rect.left and mouseX < classicInvertedishButton.rect.right and mouseY > classicInvertedishButton.rect.top and mouseY < classicInvertedishButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     theme = "Invertedish"
-            if mouseX > classicInvertedButton.rect.left and mouseX < classicInvertedButton.rect.right and mouseY > classicInvertedButton.rect.top and mouseY < classicInvertedButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicInvertedButton.rect.left and mouseX < classicInvertedButton.rect.right and mouseY > classicInvertedButton.rect.top and mouseY < classicInvertedButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     theme = "Inverted"
-            if mouseX > classicAbyssButton.rect.left and mouseX < classicAbyssButton.rect.right and mouseY > classicAbyssButton.rect.top and mouseY < classicAbyssButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicAbyssButton.rect.left and mouseX < classicAbyssButton.rect.right and mouseY > classicAbyssButton.rect.top and mouseY < classicAbyssButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     theme = "Abyss"
-            if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -506,6 +586,8 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Settings"
+            else:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
@@ -568,15 +650,15 @@ while programRunning:
             if event.type == py.QUIT:
                 programRunning = False
             if mouseX > classicDotButton.rect.left and mouseX < classicDotButton.rect.right and mouseY > classicDotButton.rect.top and mouseY < classicDotButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     dotValue = dotValue + clickValue
-            if mouseX > classicClickUpgradeButton.rect.left and mouseX < classicClickUpgradeButton.rect.right and mouseY > classicClickUpgradeButton.rect.top and mouseY < classicClickUpgradeButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicClickUpgradeButton.rect.left and mouseX < classicClickUpgradeButton.rect.right and mouseY > classicClickUpgradeButton.rect.top and mouseY < classicClickUpgradeButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -585,8 +667,8 @@ while programRunning:
                     if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                         clickValue = (clickValue + 1) * (prestigeValue + 1)
                         clickUpgradeValue = clickUpgradeValue + 1
-            if mouseX > classicPrestigeButton.rect.left and mouseX < classicPrestigeButton.rect.right and mouseY > classicPrestigeButton.rect.top and mouseY < classicPrestigeButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicPrestigeButton.rect.left and mouseX < classicPrestigeButton.rect.right and mouseY > classicPrestigeButton.rect.top and mouseY < classicPrestigeButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -597,8 +679,8 @@ while programRunning:
                         dotValue = 0
                         clickValue = 1
                         clickUpgradeValue = 0
-            if mouseX > classicStagePrestigeButton.rect.left and mouseX < classicStagePrestigeButton.rect.right and mouseY > classicStagePrestigeButton.rect.top and mouseY < classicStagePrestigeButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicStagePrestigeButton.rect.left and mouseX < classicStagePrestigeButton.rect.right and mouseY > classicStagePrestigeButton.rect.top and mouseY < classicStagePrestigeButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -610,8 +692,8 @@ while programRunning:
                         dotValue = 0
                         clickValue = 1
                         clickUpgradeValue = 0
-            if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
-                py.mouse.set_system_cursor(py.SYSTEM_CURSOR_HAND)
+            elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
                     if sfxBool == True:
                         py.mixer.music.load("Click.wav")
@@ -621,6 +703,8 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Menu"
+            else:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
@@ -714,25 +798,25 @@ while programRunning:
             ms.showinfo("Stage 5" , "By now, you must have guessed what will be automated next. The next time I see you, there will be something different...")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
-            classicGameObjects.remove(classicDotCounter)
         elif theme == "Yin Yang":
             screen.fill((0 , 0 , 0))
-            yinYangGameObjects.remove(classicDotCounter)
         elif theme == "Yang Yin":
             screen.fill((255 , 255 , 255))
-            yangYinGameObjects.remove(yangYinDotCounter)
         elif theme == "Classicish":
             screen.fill((255 , 0 , 255))
-            classicishGameObjects.remove(yangYinDotCounter)
         elif theme == "Invertedish":
             screen.fill((0 , 255 , 0))
-            invertedishGameObjects.remove(classicDotCounter)
         elif theme == "Inverted":
             screen.fill((0 , 255 , 0))
-            invertedGameObjects.remove(yangYinDotCounter)
         elif theme == "Abyss":
             screen.fill((0 , 0 , 0))
-            abyssGameObjects.remove(yangYinDotCounter)
+        classicGameObjects.remove(classicDotCounter)
+        yinYangGameObjects.remove(classicDotCounter)
+        yangYinGameObjects.remove(yangYinDotCounter)
+        classicishGameObjects.remove(yangYinDotCounter)
+        invertedishGameObjects.remove(classicDotCounter)
+        invertedGameObjects.remove(yangYinDotCounter)
+        abyssGameObjects.remove(yangYinDotCounter)
         upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - dotValue
         prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - dotValue
         stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - dotValue)]
@@ -747,8 +831,14 @@ while programRunning:
         classicDotCounter = Text(dotCount , 410 , 35 , (255 , 255 , 255) , 25)
         yangYinDotCounter = yinYang(classicDotCounter , True)
         statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
+        classicGameObjects.add(classicDotCounter)
+        yinYangGameObjects.add(classicDotCounter)
+        yangYinGameObjects.add(yangYinDotCounter)
+        classicishGameObjects.add(yangYinDotCounter)
+        invertedishGameObjects.add(classicDotCounter)
+        invertedGameObjects.add(yangYinDotCounter)
+        abyssGameObjects.add(yangYinDotCounter)
         if theme == "Classic":
-            classicGameObjects.add(classicDotCounter)
             for object in classicGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
@@ -758,7 +848,6 @@ while programRunning:
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(classicStagePrestigeButton.surface , classicStagePrestigeButton.rect)
         elif theme == "Yin Yang":
-            yinYangGameObjects.add(classicDotCounter)
             for object in yinYangGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
@@ -768,7 +857,6 @@ while programRunning:
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(yinYangStagePrestigeButton.surface , yinYangStagePrestigeButton.rect)
         elif theme == "Yang Yin":
-            yangYinGameObjects.add(yangYinDotCounter)
             for object in yangYinGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
@@ -777,8 +865,7 @@ while programRunning:
                 screen.blit(yangYinPrestigeButton.surface , yangYinPrestigeButton.rect)
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(yangYinStagePrestigeButton.surface , yangYinStagePrestigeButton.rect)
-        elif theme == "Classicish":
-            classicishGameObjects.add(yangYinDotCounter)
+        elif theme == "Classicish":            
             for object in classicishGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
@@ -788,7 +875,6 @@ while programRunning:
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(classicStagePrestigeButton.surface , classicStagePrestigeButton.rect)
         elif theme == "Invertedish":
-            invertedishGameObjects.add(classicDotCounter)
             for object in invertedishGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
@@ -798,7 +884,6 @@ while programRunning:
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(invertedishStagePrestigeButton.surface , invertedishStagePrestigeButton.rect)
         elif theme == "Inverted":
-            invertedGameObjects.add(yangYinDotCounter)
             for object in invertedGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
@@ -808,7 +893,6 @@ while programRunning:
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(invertedishStagePrestigeButton.surface , invertedishStagePrestigeButton.rect)
         elif theme == "Abyss":
-            abyssGameObjects.add(yangYinDotCounter)
             for object in abyssGameObjects:
                 screen.blit(object.surface , object.rect)
             if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
