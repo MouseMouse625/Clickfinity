@@ -82,6 +82,7 @@ firstDotMessage = False
 firstUpgradeMessage = False
 firstPrestigeMessage = False
 firstStagePrestigeMessage = False
+creditsMessage = False
 stageTwoMessage = False
 stageThreeMessage = False
 stageFourMessage = False
@@ -110,6 +111,10 @@ classicYangYinButton = Button(138 , 38 , 250 , 210 , (0 , 200 , 255))
 classicClassicButton = Button(110 , 38 , 250 , 250 , (0 , 200 , 255))
 classicYinYangButton = Button(138 , 38 , 250 , 290 , (0 , 200 , 255))
 classicClassicishButton = Button(160 , 38 , 250 , 330 , (0 , 200 , 255))
+classicEasterEggLvlOne = Button(5 , 5 , 5 , 495 , (0 , 200 , 255))
+classicEasterEggLvlTwo = Button(5 , 5 , 250 , 250 , (255 , 0 , 255))
+classicEasterEggLvlThree = Button(1 , 1 , 76 , 236 , (255 , 0 , 255))
+classicEasterEggLvlFour = Button(1 , 1 , 347 , 378 , (255 , 0 , 255))
 classicAbyssButton = Button(160 , 38 , 250 , 370 , (0 , 200 , 255))
 classicBackButton = Button(78 , 33  , 55 , 35 , (0 , 200 , 255))
 classicSettingsButton = Button(110 , 30 , 250 , 270 , (0 , 200 , 255))
@@ -132,11 +137,13 @@ classicDotCounter = Text(dotCount , 410 , 35 , (255 , 255 , 255) , 25)
 classicMenuObjects = py.sprite.Group()
 classicSettingsObjects = py.sprite.Group()
 classicThemesObjects = py.sprite.Group()
+classicCreditsObjects = py.sprite.Group()
 classicGameObjects = py.sprite.Group()
 classicMenuObjects.add(classicStartButton , classicSettingsButton , classicStartButtonText , classicSettingsButtonText)
 classicSettingsObjects.add(classicThemesButton , classicThemesButtonText , classicBackButton , classicBackButtonText , classicFactoryResetButton , classicFactoryResetButtonText , classicCreditsButton , classicCreditsButtonText)
 classicThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , classicClassicButtonText , classicYinYangButtonText , classicYangYinButtonText , classicInvertedButton , classicInvertedButtonText , classicInvertedishButton , classicInvertedishButtonText , classicClassicishButton , classicClassicishButtonText , classicAbyssButton , classicAbyssButtonText , classicBackButton , classicBackButtonText)
 classicGameObjects.add(classicDotButton , classicDotCounter , classicBackButton , classicBackButtonText)
+classicCreditsObjects.add(classicBackButton , classicBackButtonText)
 yinYangDotButton = yinYang(classicDotButton , False)
 yinYangClickUpgradeButton = yinYang(classicClickUpgradeButton , False)
 yinYangPrestigeButton = yinYang(classicPrestigeButton , False)
@@ -150,6 +157,10 @@ yinYangYangYinButton = yinYang(classicYangYinButton , False)
 yinYangClassicButton = yinYang(classicClassicButton , False)
 yinYangCreditsButton = yinYang(classicCreditsButton , False)
 yinYangYinYangButton = yinYang(classicYinYangButton , False)
+yinYangEasterEggLvlOne = yinYang(classicEasterEggLvlOne , False)
+yinYangEasterEggLvlTwo = yinYang(classicEasterEggLvlTwo , True)
+yinYangEasterEggLvlThree = yinYang(classicEasterEggLvlThree , True)
+yinYangEasterEggLvlFour = yinYang(classicEasterEggLvlFour , True)
 yinYangClassicishButton = yinYang(classicClassicishButton , False)
 yinYangFactoryResetButton = yinYang(classicFactoryResetButton , False)
 yinYangAbyssButton = yinYang(classicAbyssButton , False)
@@ -171,10 +182,12 @@ yinYangMenuObjects = py.sprite.Group()
 yinYangSettingsObjects = py.sprite.Group()
 yinYangThemesObjects = py.sprite.Group()
 yinYangGameObjects = py.sprite.Group()
+yinYangCreditsObjects = py.sprite.Group()
 yinYangMenuObjects.add(yinYangStartButton , yinYangSettingsButton , yinYangSettingsButtonText , yinYangStartButtonText)
 yinYangSettingsObjects.add(yinYangThemesButton , yinYangThemesButtonText , yinYangBackButton , yinYangBackButtonText , yinYangFactoryResetButton , yinYangFactoryResetButtonText , yinYangCreditsButton , yinYangCreditsButtonText)
 yinYangThemesObjects.add(yinYangClassicButton , yinYangClassicButtonText , yinYangYangYinButton , yinYangYangYinButtonText , yinYangYinYangButton , yinYangYinYangButtonText , yinYangBackButton , yinYangBackButtonText , yinYangInvertedButton , yinYangInvertedButtonText , yinYangInvertedishButton , yinYangInvertedishButtonText , yinYangClassicishButton , yinYangClassicishButtonText , yinYangAbyssButton , yinYangAbyssButtonText)
 yinYangGameObjects.add(yinYangDotButton , classicDotCounter , yinYangBackButton , yinYangBackButtonText)
+yinYangCreditsObjects.add(yinYangBackButton , yinYangBackButtonText)
 yangYinDotButton = yinYang(classicDotButton , True)
 yangYinClickUpgradeButton = yinYang(classicClickUpgradeButton , True)
 yangYinPrestigeButton = yinYang(classicPrestigeButton , True)
@@ -185,6 +198,10 @@ yangYinInvertedButton = yinYang(classicInvertedButton , True)
 yangYinInvertedishButton = yinYang(classicInvertedishButton , True)
 yangYinYangYinButton = yinYang(classicYangYinButton , True)
 yangYinClassicButton = yinYang(classicClassicButton , True)
+yangYinEasterEggLvlOne = yinYang(classicEasterEggLvlOne , True)
+yangYinEasterEggLvlTwo = yinYang(classicEasterEggLvlTwo , False)
+yangYinEasterEggLvlThree = yinYang(classicEasterEggLvlThree , False)
+yangYinEasterEggLvlFour = yinYang(classicEasterEggLvlFour , False)
 yangYinYinYangButton = yinYang(classicYinYangButton , True)
 yangYinClassicishButton = yinYang(classicClassicishButton , True)
 yangYinFactoryResetButton = yinYang(classicFactoryResetButton , True)
@@ -197,18 +214,22 @@ yangYinMenuObjects = py.sprite.Group()
 yangYinSettingsObjects = py.sprite.Group()
 yangYinThemesObjects = py.sprite.Group()
 yangYinGameObjects = py.sprite.Group()
+yangYinCreditsObjects = py.sprite.Group()
 yangYinMenuObjects.add(yangYinStartButton , yangYinSettingsButton , classicSettingsButtonText , classicStartButtonText)
 yangYinSettingsObjects.add(yangYinThemesButton , classicThemesButtonText , yangYinBackButton , classicBackButtonText , yangYinFactoryResetButton , classicFactoryResetButtonText , yangYinCreditsButton , classicCreditsButtonText)
 yangYinThemesObjects.add(yangYinClassicButton , classicClassicButtonText , yangYinYinYangButton , classicYinYangButtonText , yangYinYangYinButton , classicYangYinButtonText , yangYinBackButton , classicBackButtonText , yangYinInvertedButton , classicInvertedButtonText , yangYinInvertedishButton , classicInvertedishButtonText , yangYinClassicishButton , classicClassicishButtonText , yangYinAbyssButton , classicAbyssButtonText)
 yangYinGameObjects.add(yangYinDotButton , yangYinDotCounter , yangYinBackButton , classicBackButtonText)
+yangYinCreditsObjects.add(yangYinBackButton , classicBackButtonText)
 classicishMenuObjects = py.sprite.Group()
 classicishSettingsObjects = py.sprite.Group()
 classicishThemesObjects = py.sprite.Group()
 classicishGameObjects = py.sprite.Group()
+classicishCreditsObjects = py.sprite.Group()
 classicishMenuObjects.add(classicStartButton , classicSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
 classicishSettingsObjects.add(classicThemesButton , yinYangThemesButtonText , classicBackButton , yinYangBackButtonText , classicFactoryResetButton , yinYangFactoryResetButtonText , classicCreditsButton , yinYangCreditsButtonText)
 classicishThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , classicBackButton , yinYangBackButtonText , classicInvertedButton , yinYangInvertedButtonText , classicInvertedishButton , yinYangInvertedishButtonText , classicClassicishButton , yinYangClassicishButtonText , classicAbyssButton , yinYangAbyssButtonText)
 classicishGameObjects.add(classicDotButton , yangYinDotCounter , classicBackButton , yinYangBackButtonText)
+classicishCreditsObjects.add(classicBackButton , yinYangBackButtonText)
 invertedishDotButton = Button(30 , 30 , 250 , 190 , (255 , 55 , 0))
 invertedishClickUpgradeButton = Button(30 , 30 , 250 , 230 , (55 , 0 , 255))
 invertedishPrestigeButton = Button(30 , 30 , 250 , 270 , (0 , 255 , 255))
@@ -230,26 +251,32 @@ invertedishMenuObjects = py.sprite.Group()
 invertedishSettingsObjects = py.sprite.Group()
 invertedishThemesObjects = py.sprite.Group()
 invertedishGameObjects = py.sprite.Group()
+invertedishCreditsObjects = py.sprite.Group()
 invertedishMenuObjects.add(invertedishStartButton , invertedishSettingsButton , classicStartButtonText , classicSettingsButtonText)
 invertedishSettingsObjects.add(invertedishThemesButton , classicThemesButtonText , invertedishBackButton , classicBackButtonText , invertedishFactoryResetButton , classicFactoryResetButtonText , invertedCreditsButton , classicCreditsButtonText)
 invertedishThemesObjects.add(invertedishClassicButton , invertedishYinYangButton , invertedishYangYinButton , classicClassicButtonText , classicYinYangButtonText , classicYangYinButtonText , invertedishInvertedButton , classicInvertedButtonText , invertedishInvertedishButton , classicInvertedishButtonText , invertedishClassicishButton , classicClassicishButtonText , invertedishAbyssButton , classicAbyssButtonText , invertedishBackButton , classicBackButtonText)
 invertedishGameObjects.add(invertedishDotButton , classicDotCounter , invertedishBackButton , classicBackButtonText)
+invertedishCreditsObjects.add(invertedishBackButton , classicBackButtonText)
 invertedMenuObjects = py.sprite.Group()
 invertedSettingsObjects = py.sprite.Group()
 invertedThemesObjects = py.sprite.Group()
 invertedGameObjects = py.sprite.Group()
+invertedCreditsObjects = py.sprite.Group()
 invertedMenuObjects.add(invertedishStartButton , invertedishSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
 invertedSettingsObjects.add(invertedishThemesButton , yinYangThemesButtonText , invertedishBackButton , yinYangBackButtonText , invertedishFactoryResetButton , yinYangFactoryResetButtonText , invertedCreditsButton , yinYangCreditsButtonText)
 invertedThemesObjects.add(invertedishClassicButton , invertedishYinYangButton , invertedishYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , invertedishInvertedButton , yinYangInvertedButtonText , invertedishInvertedishButton , yinYangInvertedishButtonText , invertedishClassicishButton , yinYangClassicishButtonText , invertedishAbyssButton , yinYangAbyssButtonText , invertedishBackButton , yinYangBackButtonText)
 invertedGameObjects.add(invertedishDotButton , yangYinDotCounter , invertedishBackButton , yinYangBackButtonText)
+invertedishCreditsObjects.add(invertedishBackButton , yinYangBackButtonText)
 abyssMenuObjects = py.sprite.Group()
 abyssSettingsObjects = py.sprite.Group()
 abyssThemesObjects = py.sprite.Group()
 abyssGameObjects = py.sprite.Group()
+abyssCreditsObjects = py.sprite.Group()
 abyssMenuObjects.add(yangYinStartButton , yangYinSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
 abyssSettingsObjects.add(yangYinThemesButton , yinYangThemesButtonText , yangYinBackButton , yinYangBackButtonText , yangYinFactoryResetButton , yinYangFactoryResetButtonText , yangYinCreditsButton , yinYangCreditsButtonText)
 abyssThemesObjects.add(yangYinClassicButton , yangYinYinYangButton , yangYinYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , yangYinInvertedButton , yinYangInvertedButtonText , yangYinInvertedishButton , yinYangInvertedishButtonText , yangYinClassicishButton , yinYangClassicishButtonText , yangYinAbyssButton , yinYangAbyssButtonText , yangYinBackButton , yinYangBackButtonText)
 abyssGameObjects.add(yangYinDotButton , yangYinDotCounter , yangYinBackButton , yinYangBackButtonText)
+abyssCreditsObjects.add(yangYinBackButton , yinYangBackButtonText)
 programRunning = True
 while programRunning:
     mouseX , mouseY = py.mouse.get_pos()
@@ -450,13 +477,13 @@ while programRunning:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
     elif level == "Credits":
-        if settingsMessage == False:
-            settingsMessage = True
+        if creditsMessage == False:
+            creditsMessage = True
             if sfxBool == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
-            ms.showinfo("Settings" , "Hello! This is Settings. You can select your theme first, and go into the gameplay. See you there!")
+            ms.showinfo("Credits" , "Credits to Mixit for their sound effects. Their website is at https://mixit.co , and their sound efffects page can be found at https://mixit.co/free-sound-effects/")
         for event in py.event.get():
             if event.type == py.QUIT:
                 programRunning = False
@@ -471,6 +498,7 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Settings"
+                    creditsMessage = False
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
@@ -481,31 +509,31 @@ while programRunning:
                         sfxBool = True
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
-            for object in classicSettingsObjects:
+            for object in classicCreditsObjects:
                 screen.blit(object.surface , object.rect)
         elif theme == "Yin Yang":
             screen.fill((0 , 0 , 0))
-            for object in yinYangSettingsObjects:
+            for object in yinYangCreditsObjects:
                 screen.blit(object.surface , object.rect)
         elif theme == "Yang Yin":
             screen.fill((255 , 255 , 255))
-            for object in yangYinSettingsObjects:
+            for object in yangYinCreditsObjects:
                 screen.blit(object.surface , object.rect)
         elif theme == "Classicish":
             screen.fill((255 , 0 , 255))
-            for object in classicishSettingsObjects:
+            for object in classicishCreditsObjects:
                 screen.blit(object.surface , object.rect)
         elif theme == "Invertedish":
             screen.fill((0 , 255 , 0))
-            for object in invertedishSettingsObjects:
+            for object in invertedishCreditsObjects:
                 screen.blit(object.surface , object.rect)
         elif theme == "Inverted":
             screen.fill((0 , 255 , 0))
-            for object in invertedSettingsObjects:
+            for object in invertedCreditsObjects:
                 screen.blit(object.surface , object.rect)
         elif theme == "Abyss":
             screen.fill((0 , 0 , 0))
-            for object in abyssSettingsObjects:
+            for object in abyssCreditsObjects:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
     elif level == "Themes":
