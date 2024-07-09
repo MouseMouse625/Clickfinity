@@ -1,5 +1,6 @@
 import pygame as py
 from tkinter import messagebox as ms
+import random as rd
 py.init()
 py.mixer.init()
 class Button(py.sprite.Sprite):
@@ -55,7 +56,7 @@ def yinYang(object , blackBool):
             return Button(object.width , object.height , object.xPosition , object.yPosition , (0 , 0 , 0))
 screenWidth = 500
 screenHeight = 500
-level = "Menu"
+level = "Disco"
 theme = "Classic"
 dotValue = 0
 dotCount = append(dotValue , "Dot" , "Dots" , True)
@@ -91,6 +92,7 @@ easterEggLevelOneMessage = False
 easterEggLevelTwoMessage = False
 easterEggLevelThreeMessage = False
 easterEggLevelFourMessage = False
+discoMessage = False
 statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
 screen = py.display.set_mode((screenWidth , screenHeight))
 py.display.set_icon(py.image.load("Window Icon.png"))
@@ -99,10 +101,12 @@ IDLEDOTGAIN = py.USEREVENT + 1
 IDLEDPCGAIN = py.USEREVENT + 2
 IDLEUPGRADE = py.USEREVENT + 3
 IDLEPRESTIGE = py.USEREVENT + 4
+SCREENCOLOURCHANGE = py.USEREVENT + 5
 py.time.set_timer(IDLEDOTGAIN , 50)
 py.time.set_timer(IDLEDPCGAIN , 500)
 py.time.set_timer(IDLEUPGRADE , 10)
 py.time.set_timer(IDLEPRESTIGE , 10)
+py.time.set_timer(SCREENCOLOURCHANGE , 250)
 classicDotButton = Button(30 , 30 , 250 , 190 , (0 , 200 , 255))
 classicClickUpgradeButton = Button(30 , 30 , 250 , 230 , (200 , 255 , 0))
 classicPrestigeButton = Button(30 , 30 , 250 , 270 , (255 , 0 , 0))
@@ -147,6 +151,7 @@ classicEasterEggLvlOneObjects = py.sprite.Group()
 classicEasterEggLvlTwoObjects = py.sprite.Group()
 classicEasterEggLvlThreeObjects = py.sprite.Group()
 classicEasterEggLvlFourObjects = py.sprite.Group()
+classicDiscoObjects = py.sprite.Group()
 classicMenuObjects.add(classicStartButton , classicSettingsButton , classicStartButtonText , classicSettingsButtonText)
 classicSettingsObjects.add(classicThemesButton , classicThemesButtonText , classicBackButton , classicBackButtonText , classicFactoryResetButton , classicFactoryResetButtonText , classicCreditsButton , classicCreditsButtonText)
 classicThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , classicClassicButtonText , classicYinYangButtonText , classicYangYinButtonText , classicInvertedButton , classicInvertedButtonText , classicInvertedishButton , classicInvertedishButtonText , classicClassicishButton , classicClassicishButtonText , classicAbyssButton , classicAbyssButtonText , classicBackButton , classicBackButtonText)
@@ -156,6 +161,7 @@ classicEasterEggLvlOneObjects.add(classicEasterEggLvlOne , classicBackButton , c
 classicEasterEggLvlTwoObjects.add(classicEasterEggLvlTwo , classicBackButton , classicBackButtonText)
 classicEasterEggLvlThreeObjects.add(classicEasterEggLvlThree , classicBackButton , classicBackButtonText)
 classicEasterEggLvlFourObjects.add(classicEasterEggLvlFour , classicBackButton , classicBackButtonText)
+classicDiscoObjects.add(classicBackButton , classicBackButtonText)
 yinYangDotButton = yinYang(classicDotButton , False)
 yinYangClickUpgradeButton = yinYang(classicClickUpgradeButton , False)
 yinYangPrestigeButton = yinYang(classicPrestigeButton , False)
@@ -199,6 +205,7 @@ yinYangEasterEggLvlOneObjects = py.sprite.Group()
 yinYangEasterEggLvlTwoObjects = py.sprite.Group()
 yinYangEasterEggLvlThreeObjects = py.sprite.Group()
 yinYangEasterEggLvlFourObjects = py.sprite.Group()
+yinYangDiscoObjects = py.sprite.Group()
 yinYangMenuObjects.add(yinYangStartButton , yinYangSettingsButton , yinYangSettingsButtonText , yinYangStartButtonText)
 yinYangSettingsObjects.add(yinYangThemesButton , yinYangThemesButtonText , yinYangBackButton , yinYangBackButtonText , yinYangFactoryResetButton , yinYangFactoryResetButtonText , yinYangCreditsButton , yinYangCreditsButtonText)
 yinYangThemesObjects.add(yinYangClassicButton , yinYangClassicButtonText , yinYangYangYinButton , yinYangYangYinButtonText , yinYangYinYangButton , yinYangYinYangButtonText , yinYangBackButton , yinYangBackButtonText , yinYangInvertedButton , yinYangInvertedButtonText , yinYangInvertedishButton , yinYangInvertedishButtonText , yinYangClassicishButton , yinYangClassicishButtonText , yinYangAbyssButton , yinYangAbyssButtonText)
@@ -208,6 +215,7 @@ yinYangEasterEggLvlOneObjects.add(yinYangEasterEggLvlOne , yinYangBackButton , y
 yinYangEasterEggLvlTwoObjects.add(yinYangEasterEggLvlTwo , yinYangBackButton , yinYangBackButtonText)
 yinYangEasterEggLvlThreeObjects.add(yinYangEasterEggLvlThree , yinYangBackButton , yinYangBackButtonText)
 yinYangEasterEggLvlFourObjects.add(yinYangEasterEggLvlFour , yinYangBackButton , yinYangBackButtonText)
+yinYangDiscoObjects.add(yinYangBackButton , yinYangBackButtonText)
 yangYinDotButton = yinYang(classicDotButton , True)
 yangYinClickUpgradeButton = yinYang(classicClickUpgradeButton , True)
 yangYinPrestigeButton = yinYang(classicPrestigeButton , True)
@@ -239,6 +247,7 @@ yangYinEasterEggLvlOneObjects = py.sprite.Group()
 yangYinEasterEggLvlTwoObjects = py.sprite.Group()
 yangYinEasterEggLvlThreeObjects = py.sprite.Group()
 yangYinEasterEggLvlFourObjects = py.sprite.Group()
+yangYinDiscoObjects = py.sprite.Group()
 yangYinMenuObjects.add(yangYinStartButton , yangYinSettingsButton , classicSettingsButtonText , classicStartButtonText)
 yangYinSettingsObjects.add(yangYinThemesButton , classicThemesButtonText , yangYinBackButton , classicBackButtonText , yangYinFactoryResetButton , classicFactoryResetButtonText , yangYinCreditsButton , classicCreditsButtonText)
 yangYinThemesObjects.add(yangYinClassicButton , classicClassicButtonText , yangYinYinYangButton , classicYinYangButtonText , yangYinYangYinButton , classicYangYinButtonText , yangYinBackButton , classicBackButtonText , yangYinInvertedButton , classicInvertedButtonText , yangYinInvertedishButton , classicInvertedishButtonText , yangYinClassicishButton , classicClassicishButtonText , yangYinAbyssButton , classicAbyssButtonText)
@@ -248,6 +257,7 @@ yangYinEasterEggLvlOneObjects.add(yangYinEasterEggLvlOne , yangYinBackButton , c
 yangYinEasterEggLvlTwoObjects.add(yangYinEasterEggLvlTwo , yangYinBackButton , classicBackButtonText)
 yangYinEasterEggLvlThreeObjects.add(yangYinEasterEggLvlThree , yangYinBackButton , classicBackButtonText)
 yangYinEasterEggLvlFourObjects.add(yangYinEasterEggLvlFour , yangYinBackButton , classicBackButtonText)
+yangYinDiscoObjects.add(yangYinBackButton , classicBackButtonText)
 classicishMenuObjects = py.sprite.Group()
 classicishSettingsObjects = py.sprite.Group()
 classicishThemesObjects = py.sprite.Group()
@@ -257,6 +267,7 @@ classicishEasterEggLvlOneObjects = py.sprite.Group()
 classicishEasterEggLvlTwoObjects = py.sprite.Group()
 classicishEasterEggLvlThreeObjects = py.sprite.Group()
 classicishEasterEggLvlFourObjects = py.sprite.Group()
+classicishDiscoObjects = py.sprite.Group()
 classicishMenuObjects.add(classicStartButton , classicSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
 classicishSettingsObjects.add(classicThemesButton , yinYangThemesButtonText , classicBackButton , yinYangBackButtonText , classicFactoryResetButton , yinYangFactoryResetButtonText , classicCreditsButton , yinYangCreditsButtonText)
 classicishThemesObjects.add(classicClassicButton , classicYinYangButton , classicYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , classicBackButton , yinYangBackButtonText , classicInvertedButton , yinYangInvertedButtonText , classicInvertedishButton , yinYangInvertedishButtonText , classicClassicishButton , yinYangClassicishButtonText , classicAbyssButton , yinYangAbyssButtonText)
@@ -266,6 +277,7 @@ classicishEasterEggLvlOneObjects.add(classicEasterEggLvlOne , classicBackButton 
 classicishEasterEggLvlTwoObjects.add(classicEasterEggLvlTwo , classicBackButton , yinYangBackButtonText)
 classicishEasterEggLvlThreeObjects.add(classicEasterEggLvlThree , classicBackButton , yinYangBackButtonText)
 classicishEasterEggLvlFourObjects.add(classicEasterEggLvlFour , classicBackButton , yinYangBackButtonText)
+classicishDiscoObjects.add(classicBackButton , yinYangBackButtonText)
 invertedishDotButton = Button(30 , 30 , 250 , 190 , (255 , 55 , 0))
 invertedishClickUpgradeButton = Button(30 , 30 , 250 , 230 , (55 , 0 , 255))
 invertedishPrestigeButton = Button(30 , 30 , 250 , 270 , (0 , 255 , 255))
@@ -296,15 +308,17 @@ invertedishEasterEggLvlOneObjects = py.sprite.Group()
 invertedishEasterEggLvlTwoObjects = py.sprite.Group()
 invertedishEasterEggLvlThreeObjects = py.sprite.Group()
 invertedishEasterEggLvlFourObjects = py.sprite.Group()
+invertedishDiscoObjects = py.sprite.Group()
 invertedishMenuObjects.add(invertedishStartButton , invertedishSettingsButton , classicStartButtonText , classicSettingsButtonText)
 invertedishSettingsObjects.add(invertedishThemesButton , classicThemesButtonText , invertedishBackButton , classicBackButtonText , invertedishFactoryResetButton , classicFactoryResetButtonText , invertedCreditsButton , classicCreditsButtonText)
 invertedishThemesObjects.add(invertedishClassicButton , invertedishYinYangButton , invertedishYangYinButton , classicClassicButtonText , classicYinYangButtonText , classicYangYinButtonText , invertedishInvertedButton , classicInvertedButtonText , invertedishInvertedishButton , classicInvertedishButtonText , invertedishClassicishButton , classicClassicishButtonText , invertedishAbyssButton , classicAbyssButtonText , invertedishBackButton , classicBackButtonText)
 invertedishGameObjects.add(invertedishDotButton , classicDotCounter , invertedishBackButton , classicBackButtonText)
 invertedishCreditsObjects.add(invertedishBackButton , classicBackButtonText)
-invertedishEasterEggLvlOneObjects.add(invertedishEasterEggLvlOne , classicBackButton , classicBackButtonText)
-invertedishEasterEggLvlTwoObjects.add(invertedishEasterEggLvlTwo , classicBackButton , classicBackButtonText)
-invertedishEasterEggLvlThreeObjects.add(invertedishEasterEggLvlThree , classicBackButton , classicBackButtonText)
-invertedishEasterEggLvlFourObjects.add(yinYangEasterEggLvlFour , classicBackButton , classicBackButtonText)
+invertedishEasterEggLvlOneObjects.add(invertedishEasterEggLvlOne , invertedishBackButton , classicBackButtonText)
+invertedishEasterEggLvlTwoObjects.add(invertedishEasterEggLvlTwo , invertedishBackButton , classicBackButtonText)
+invertedishEasterEggLvlThreeObjects.add(invertedishEasterEggLvlThree , invertedishBackButton , classicBackButtonText)
+invertedishEasterEggLvlFourObjects.add(invertedishEasterEggLvlFour , invertedishBackButton , classicBackButtonText)
+invertedishDiscoObjects.add(invertedishBackButton , classicBackButtonText)
 invertedMenuObjects = py.sprite.Group()
 invertedSettingsObjects = py.sprite.Group()
 invertedThemesObjects = py.sprite.Group()
@@ -314,6 +328,7 @@ invertedEasterEggLvlOneObjects = py.sprite.Group()
 invertedEasterEggLvlTwoObjects = py.sprite.Group()
 invertedEasterEggLvlThreeObjects = py.sprite.Group()
 invertedEasterEggLvlFourObjects = py.sprite.Group()
+invertedDiscoObjects = py.sprite.Group()
 invertedMenuObjects.add(invertedishStartButton , invertedishSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
 invertedSettingsObjects.add(invertedishThemesButton , yinYangThemesButtonText , invertedishBackButton , yinYangBackButtonText , invertedishFactoryResetButton , yinYangFactoryResetButtonText , invertedCreditsButton , yinYangCreditsButtonText)
 invertedThemesObjects.add(invertedishClassicButton , invertedishYinYangButton , invertedishYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , invertedishInvertedButton , yinYangInvertedButtonText , invertedishInvertedishButton , yinYangInvertedishButtonText , invertedishClassicishButton , yinYangClassicishButtonText , invertedishAbyssButton , yinYangAbyssButtonText , invertedishBackButton , yinYangBackButtonText)
@@ -323,6 +338,7 @@ invertedEasterEggLvlOneObjects.add(invertedishEasterEggLvlOne , invertedishBackB
 invertedEasterEggLvlTwoObjects.add(invertedishEasterEggLvlTwo , invertedishBackButton , yinYangBackButtonText)
 invertedEasterEggLvlThreeObjects.add(invertedishEasterEggLvlThree , invertedishBackButton , yinYangBackButtonText)
 invertedEasterEggLvlFourObjects.add(invertedishEasterEggLvlFour , invertedishBackButton , yinYangBackButtonText)
+invertedDiscoObjects.add(invertedishBackButton , yinYangBackButtonText)
 abyssMenuObjects = py.sprite.Group()
 abyssSettingsObjects = py.sprite.Group()
 abyssThemesObjects = py.sprite.Group()
@@ -332,6 +348,7 @@ abyssEasterEggLvlOneObjects = py.sprite.Group()
 abyssEasterEggLvlTwoObjects = py.sprite.Group()
 abyssEasterEggLvlThreeObjects = py.sprite.Group()
 abyssEasterEggLvlFourObjects = py.sprite.Group()
+abyssDiscoObjects = py.sprite.Group()
 abyssMenuObjects.add(yangYinStartButton , yangYinSettingsButton , yinYangStartButtonText , yinYangSettingsButtonText)
 abyssSettingsObjects.add(yangYinThemesButton , yinYangThemesButtonText , yangYinBackButton , yinYangBackButtonText , yangYinFactoryResetButton , yinYangFactoryResetButtonText , yangYinCreditsButton , yinYangCreditsButtonText)
 abyssThemesObjects.add(yangYinClassicButton , yangYinYinYangButton , yangYinYangYinButton , yinYangClassicButtonText , yinYangYinYangButtonText , yinYangYangYinButtonText , yangYinInvertedButton , yinYangInvertedButtonText , yangYinInvertedishButton , yinYangInvertedishButtonText , yangYinClassicishButton , yinYangClassicishButtonText , yangYinAbyssButton , yinYangAbyssButtonText , yangYinBackButton , yinYangBackButtonText)
@@ -341,6 +358,7 @@ abyssEasterEggLvlOneObjects.add(yangYinEasterEggLvlOne , yangYinBackButton , yin
 abyssEasterEggLvlTwoObjects.add(yangYinEasterEggLvlTwo , yangYinBackButton , yinYangBackButtonText)
 abyssEasterEggLvlThreeObjects.add(yangYinEasterEggLvlThree , yangYinBackButton , yinYangBackButtonText)
 abyssEasterEggLvlFourObjects.add(yangYinEasterEggLvlFour , yangYinBackButton , yinYangBackButtonText)
+abyssDiscoObjects.add(yangYinBackButton , yinYangBackButtonText)
 programRunning = True
 while programRunning:
     mouseX , mouseY = py.mouse.get_pos()
@@ -1023,6 +1041,17 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Easter Egg Level Two"
+            elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Credits"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
@@ -1082,6 +1111,17 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Easter Egg Level Three"
+            elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Easter Egg Level One"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
@@ -1141,6 +1181,17 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Easter Egg Level Four"
+            elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Easter Egg Level Two"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
@@ -1200,6 +1251,17 @@ while programRunning:
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     level = "Disco"
+            elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Easter Egg Level Three"
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
@@ -1208,7 +1270,7 @@ while programRunning:
                         sfxBool = True
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
-            for object in classicEasterEggLvlFourObjects:
+            for object in classicDiscoObjects:
                 screen.blit(object.surface , object.rect)
         elif theme == "Yin Yang":
             screen.fill((0 , 0 , 0))
@@ -1234,5 +1296,40 @@ while programRunning:
             screen.fill((0 , 0 , 0))
             for object in abyssEasterEggLvlFourObjects:
                 screen.blit(object.surface , object.rect)
+        py.display.flip()
+    elif level == "Disco":
+        randomColour = (rd.randint(0 , 255) , rd.randint(0 , 255) , rd.randint(0 , 255))
+        if discoMessage == False:
+            discoMessage = True
+            if sfxBool == True:
+                py.mixer.music.load("Message.wav")
+                py.mixer.music.set_volume(0.4)
+                py.mixer.music.play()
+            ms.showinfo("The Disco" , "Your persistence and stubborness paid off. You have entered the disco. If you have epilepsy or feel uncomfortable with flashing lights, please immediately return to the previous screen, and don't come back to the page, because you will not get this message again.")
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                programRunning = False
+            if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Easter Egg Level Four"
+            else:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
+            if event.type == py.KEYDOWN:
+                if event.key == py.K_ESCAPE:
+                    if sfxBool == True:
+                        sfxBool = False
+                    elif sfxBool == False:
+                        sfxBool = True
+            if event.type == SCREENCOLOURCHANGE:
+                randomColour = (rd.randint(0 , 255) , rd.randint(0 , 255) , rd.randint(0 , 255))
+                screen.fill(randomColour)
         py.display.flip()
 py.quit()
