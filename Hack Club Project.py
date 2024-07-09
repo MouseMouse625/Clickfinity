@@ -75,6 +75,7 @@ prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The
 stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - dotValue)]
 stagePrestigeRequirementCount = str(append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and " , True)) + str(append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige" , True))
 sfxBool = True
+flashingBool = False
 welcomeMessage = False
 settingsMessage = False
 themesMessage = False
@@ -93,6 +94,7 @@ easterEggLevelTwoMessage = False
 easterEggLevelThreeMessage = False
 easterEggLevelFourMessage = False
 discoMessage = False
+discoDuration = 250
 statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
 screen = py.display.set_mode((screenWidth , screenHeight))
 py.display.set_icon(py.image.load("Window Icon.png"))
@@ -106,7 +108,7 @@ py.time.set_timer(IDLEDOTGAIN , 50)
 py.time.set_timer(IDLEDPCGAIN , 500)
 py.time.set_timer(IDLEUPGRADE , 10)
 py.time.set_timer(IDLEPRESTIGE , 10)
-py.time.set_timer(SCREENCOLOURCHANGE , 250)
+py.time.set_timer(SCREENCOLOURCHANGE , discoDuration)
 classicDotButton = Button(30 , 30 , 250 , 190 , (0 , 200 , 255))
 classicClickUpgradeButton = Button(30 , 30 , 250 , 230 , (200 , 255 , 0))
 classicPrestigeButton = Button(30 , 30 , 250 , 270 , (255 , 0 , 0))
@@ -406,8 +408,16 @@ while programRunning:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicMenuObjects:
@@ -527,8 +537,16 @@ while programRunning:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicSettingsObjects:
@@ -592,8 +610,16 @@ while programRunning:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
                 if event.key == py.K_BACKSLASH:
                     level = "Easter Egg Level One"
         if theme == "Classic":
@@ -709,8 +735,16 @@ while programRunning:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicThemesObjects:
@@ -826,8 +860,16 @@ while programRunning:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
                 if event.key == py.K_SPACE:
                     if sfxBool == True:
                         py.mixer.music.load("Message.wav")
@@ -1058,8 +1100,16 @@ while programRunning:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicEasterEggLvlOneObjects:
@@ -1128,8 +1178,16 @@ while programRunning:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicEasterEggLvlTwoObjects:
@@ -1194,12 +1252,19 @@ while programRunning:
                     level = "Easter Egg Level Two"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
-            if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicEasterEggLvlThreeObjects:
@@ -1266,8 +1331,16 @@ while programRunning:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicDiscoObjects:
@@ -1305,7 +1378,12 @@ while programRunning:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
-            ms.showinfo("The Disco" , "Your persistence and stubborness paid off. You have entered the disco. If you have epilepsy or feel uncomfortable with flashing lights, please immediately return to the previous screen, and don't come back to the page, because you will not get this message again.")
+            ms.showinfo("The Disco" , "Your persistence and stubborness paid off. You have entered the disco. If you have epilepsy or feel uncomfortable with flashing lights, do not press the Slash key, as it toggles the flashing lights on and off. If you don't need to worry about that, you can press the Slash key to get fully immersed into the disco. You can also use the key to keep the background on a colour that you like.")
+            if sfxBool == True:
+                py.mixer.music.load("Message.wav")
+                py.mixer.music.set_volume(0.4)
+                py.mixer.music.play()
+            ms.showinfo("Some Settings" , "If you wanna change how long it takes for the screen to change colour, you can use the Comma and Period keys to change that. They change based on how small it currently takes for your screen to change colour")
         for event in py.event.get():
             if event.type == py.QUIT:
                 programRunning = False
@@ -1326,10 +1404,48 @@ while programRunning:
                 if event.key == py.K_ESCAPE:
                     if sfxBool == True:
                         sfxBool = False
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
-            if event.type == SCREENCOLOURCHANGE:
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        ms.showinfo("Sound Effects" , "Sound effects are now on")
+                if event.key == py.K_SLASH:
+                    if flashingBool == True:
+                        flashingBool = False
+                    elif flashingBool == False:
+                        flashingBool = True
+                if event.key == py.K_COMMA:
+                    discoDuration = discoDuration + 50
+                    screenFlashCount = "Your screen flashes every " + str(discoDuration) + " milliseconds"
+                    py.time.set_timer(SCREENCOLOURCHANGE , discoDuration)
+                    if sfxBool == True:
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    ms.showinfo("Screen Flash" , screenFlashCount)
+                if event.key == py.K_PERIOD:
+                    if discoDuration > 99:
+                        discoDuration = discoDuration - 50
+                    elif discoDuration > 19:
+                        discoDuration = discoDuration - 5
+                    elif discoDuration > 0:
+                        discoDuration = discoDuration - 1
+                    screenFlashCount = "Your screen flashes every " + str(discoDuration) + " milliseconds"
+                    py.time.set_timer(SCREENCOLOURCHANGE , discoDuration)
+                    if sfxBool == True:
+                        py.mixer.music.load("Message.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    ms.showinfo("Screen Flash" , screenFlashCount)
+            if event.type == SCREENCOLOURCHANGE and flashingBool == True:
                 randomColour = (rd.randint(0 , 255) , rd.randint(0 , 255) , rd.randint(0 , 255))
                 screen.fill(randomColour)
+        for object in classicDiscoObjects:
+            screen.blit(object.surface , object.rect)
         py.display.flip()
 py.quit()
