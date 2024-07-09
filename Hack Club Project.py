@@ -87,6 +87,10 @@ stageTwoMessage = False
 stageThreeMessage = False
 stageFourMessage = False
 stageFiveMessage = False
+easterEggLevelOneMessage = False
+easterEggLevelTwoMessage = False
+easterEggLevelThreeMessage = False
+easterEggLevelFourMessage = False
 statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
 screen = py.display.set_mode((screenWidth , screenHeight))
 py.display.set_icon(py.image.load("Window Icon.png"))
@@ -113,7 +117,7 @@ classicYinYangButton = Button(138 , 38 , 250 , 290 , (0 , 200 , 255))
 classicClassicishButton = Button(160 , 38 , 250 , 330 , (0 , 200 , 255))
 classicEasterEggLvlOne = Button(5 , 5 , 5 , 495 , (0 , 200 , 255))
 classicEasterEggLvlTwo = Button(5 , 5 , 250 , 250 , (255 , 0 , 255))
-classicEasterEggLvlThree = Button(1 , 1 , 76 , 236 , (255 , 0 , 255))
+classicEasterEggLvlThree = Button(2 , 2 , 76 , 236 , (255 , 0 , 255))
 classicEasterEggLvlFour = Button(1 , 1 , 347 , 378 , (255 , 0 , 255))
 classicAbyssButton = Button(160 , 38 , 250 , 370 , (0 , 200 , 255))
 classicBackButton = Button(78 , 33  , 55 , 35 , (0 , 200 , 255))
@@ -276,7 +280,7 @@ invertedishYangYinButton = Button(138 , 38 , 250 , 210 , (255 , 55 , 0))
 invertedishClassicButton = Button(110 , 38 , 250 , 250 , (255 , 55 , 0))
 invertedishEasterEggLvlOne = Button(5 , 5 , 5 , 495 , (255 , 55 , 0))
 invertedishEasterEggLvlTwo = Button(5 , 5 , 250 , 250 , (0 , 255 , 0))
-invertedishEasterEggLvlThree = Button(1 , 1 , 76 , 236 , (0 , 255 , 0))
+invertedishEasterEggLvlThree = Button(2 , 2 , 76 , 236 , (0 , 255 , 0))
 invertedishEasterEggLvlFour = Button(1 , 1 , 347 , 378 , (0 , 255 , 0))
 invertedishYinYangButton = Button(138 , 38 , 250 , 290 , (255 , 55 , 0))
 invertedishClassicishButton = Button(160 , 38 , 250 , 330 , (255 , 55 , 0))
@@ -573,7 +577,7 @@ while programRunning:
                     elif sfxBool == False:
                         sfxBool = True
                 if event.key == py.K_BACKSLASH:
-                    level == "Easter Egg Level One"
+                    level = "Easter Egg Level One"
         if theme == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicCreditsObjects:
@@ -996,5 +1000,239 @@ while programRunning:
                 screen.blit(yangYinPrestigeButton.surface , yangYinPrestigeButton.rect)
             if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(yangYinStagePrestigeButton.surface , yangYinStagePrestigeButton.rect)
+        py.display.flip()
+    elif level == "Easter Egg Level One":
+        if easterEggLevelOneMessage == False:
+            easterEggLevelOneMessage = True
+            if sfxBool == True:
+                py.mixer.music.load("Message.wav")
+                py.mixer.music.set_volume(0.4)
+                py.mixer.music.play()
+            ms.showinfo("Bug" , "Don't say I didn't warn you about the bug...")
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                programRunning = False
+            if mouseX > classicEasterEggLvlOne.rect.left and mouseX < classicEasterEggLvlOne.rect.right and mouseY > classicEasterEggLvlOne.rect.top and mouseY < classicEasterEggLvlOne.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Easter Egg Level Two"
+            else:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
+            if event.type == py.KEYDOWN:
+                if event.key == py.K_ESCAPE:
+                    if sfxBool == True:
+                        sfxBool = False
+                    elif sfxBool == False:
+                        sfxBool = True
+        if theme == "Classic":
+            screen.fill((255 , 0 , 255))
+            for object in classicEasterEggLvlOneObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yin Yang":
+            screen.fill((0 , 0 , 0))
+            for object in yinYangEasterEggLvlOneObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yang Yin":
+            screen.fill((255 , 255 , 255))
+            for object in yangYinEasterEggLvlOneObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Classicish":
+            screen.fill((255 , 0 , 255))
+            for object in classicishEasterEggLvlOneObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Invertedish":
+            screen.fill((0 , 255 , 0))
+            for object in invertedishEasterEggLvlOneObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Inverted":
+            screen.fill((0 , 255 , 0))
+            for object in invertedEasterEggLvlOneObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Abyss":
+            screen.fill((0 , 0 , 0))
+            for object in abyssEasterEggLvlOneObjects:
+                screen.blit(object.surface , object.rect)
+        py.display.flip()
+    elif level == "Easter Egg Level Two":
+        if easterEggLevelTwoMessage == False:
+            easterEggLevelTwoMessage = True
+            if sfxBool == True:
+                py.mixer.music.load("Message.wav")
+                py.mixer.music.set_volume(0.4)
+                py.mixer.music.play()
+            ms.showinfo("Work In Progress" , "Oh, this section is just a work in progress. You may ask why the button was so small, and about that, as I told you, it was a random bug as this section is not finished.")
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                programRunning = False
+            if mouseX > classicEasterEggLvlTwo.rect.left and mouseX < classicEasterEggLvlTwo.rect.right and mouseY > classicEasterEggLvlTwo.rect.top and mouseY < classicEasterEggLvlTwo.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Easter Egg Level Three"
+            else:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
+            if event.type == py.KEYDOWN:
+                if event.key == py.K_ESCAPE:
+                    if sfxBool == True:
+                        sfxBool = False
+                    elif sfxBool == False:
+                        sfxBool = True
+        if theme == "Classic":
+            screen.fill((255 , 0 , 255))
+            for object in classicEasterEggLvlTwoObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yin Yang":
+            screen.fill((0 , 0 , 0))
+            for object in yinYangEasterEggLvlTwoObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yang Yin":
+            screen.fill((255 , 255 , 255))
+            for object in yangYinEasterEggLvlTwoObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Classicish":
+            screen.fill((255 , 0 , 255))
+            for object in classicishEasterEggLvlTwoObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Invertedish":
+            screen.fill((0 , 255 , 0))
+            for object in invertedishEasterEggLvlTwoObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Inverted":
+            screen.fill((0 , 255 , 0))
+            for object in invertedEasterEggLvlTwoObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Abyss":
+            screen.fill((0 , 0 , 0))
+            for object in abyssEasterEggLvlTwoObjects:
+                screen.blit(object.surface , object.rect)
+        py.display.flip()
+    elif level == "Easter Egg Level Three":
+        if easterEggLevelThreeMessage == False:
+            easterEggLevelThreeMessage = True
+            if sfxBool == True:
+                py.mixer.music.load("Message.wav")
+                py.mixer.music.set_volume(0.4)
+                py.mixer.music.play()
+            ms.showinfo("Restricted Area" , "You're not supposed to be here. This section can cause crashes to your computer, as it uses commands still in the beta testing phase. Good luck.")
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                programRunning = False
+            if mouseX > classicEasterEggLvlThree.rect.left and mouseX < classicEasterEggLvlThree.rect.right and mouseY > classicEasterEggLvlThree.rect.top and mouseY < classicEasterEggLvlThree.rect.bottom:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Easter Egg Level Four"
+            else:
+                py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
+            if event.type == py.KEYDOWN:
+                if event.key == py.K_ESCAPE:
+                    if sfxBool == True:
+                        sfxBool = False
+                    elif sfxBool == False:
+                        sfxBool = True
+        if theme == "Classic":
+            screen.fill((255 , 0 , 255))
+            for object in classicEasterEggLvlThreeObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yin Yang":
+            screen.fill((0 , 0 , 0))
+            for object in yinYangEasterEggLvlThreeObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yang Yin":
+            screen.fill((255 , 255 , 255))
+            for object in yangYinEasterEggLvlThreeObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Classicish":
+            screen.fill((255 , 0 , 255))
+            for object in classicishEasterEggLvlThreeObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Invertedish":
+            screen.fill((0 , 255 , 0))
+            for object in invertedishEasterEggLvlThreeObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Inverted":
+            screen.fill((0 , 255 , 0))
+            for object in invertedEasterEggLvlThreeObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Abyss":
+            screen.fill((0 , 0 , 0))
+            for object in abyssEasterEggLvlThreeObjects:
+                screen.blit(object.surface , object.rect)
+        py.display.flip()
+    elif level == "Easter Egg Level Four":
+        py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
+        if easterEggLevelFourMessage == False:
+            easterEggLevelFourMessage = True
+            if sfxBool == True:
+                py.mixer.music.load("Message.wav")
+                py.mixer.music.set_volume(0.4)
+                py.mixer.music.play()
+            ms.showinfo("Secret" , "Ok, this screen is secret for a reason. This contains unreleased areas, which you have somehow found a backdoor to. Do not persist and dwell on this for too long, just go back to the main game.")
+        for event in py.event.get():
+            if event.type == py.QUIT:
+                programRunning = False
+            if mouseX > classicEasterEggLvlFour.rect.left and mouseX < classicEasterEggLvlFour.rect.right and mouseY > classicEasterEggLvlFour.rect.top and mouseY < classicEasterEggLvlFour.rect.bottom:
+                if event.type == py.MOUSEBUTTONDOWN:
+                    if sfxBool == True:
+                        py.mixer.music.load("Click.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                        py.mixer.music.load("Transition.wav")
+                        py.mixer.music.set_volume(0.4)
+                        py.mixer.music.play()
+                    level = "Disco"
+            if event.type == py.KEYDOWN:
+                if event.key == py.K_ESCAPE:
+                    if sfxBool == True:
+                        sfxBool = False
+                    elif sfxBool == False:
+                        sfxBool = True
+        if theme == "Classic":
+            screen.fill((255 , 0 , 255))
+            for object in classicEasterEggLvlFourObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yin Yang":
+            screen.fill((0 , 0 , 0))
+            for object in yinYangEasterEggLvlFourObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Yang Yin":
+            screen.fill((255 , 255 , 255))
+            for object in yangYinEasterEggLvlFourObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Classicish":
+            screen.fill((255 , 0 , 255))
+            for object in classicishEasterEggLvlFourObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Invertedish":
+            screen.fill((0 , 255 , 0))
+            for object in invertedishEasterEggLvlFourObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Inverted":
+            screen.fill((0 , 255 , 0))
+            for object in invertedEasterEggLvlFourObjects:
+                screen.blit(object.surface , object.rect)
+        elif theme == "Abyss":
+            screen.fill((0 , 0 , 0))
+            for object in abyssEasterEggLvlFourObjects:
+                screen.blit(object.surface , object.rect)
         py.display.flip()
 py.quit()
