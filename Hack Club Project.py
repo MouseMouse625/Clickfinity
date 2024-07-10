@@ -57,46 +57,18 @@ def yinYang(object , blackBool):
             return Button(object.width , object.height , object.xPosition , object.yPosition , (0 , 0 , 0))
 screenWidth = 500
 screenHeight = 500
-data = {"dotValue" : 0}
-level = "Disco"
-theme = "Classic"
+data = {"level" : "Menu" , "theme" : "Classic" , "dotValue" : 0 , "clickValue" : 1 , "clickUpgradeValue" : 0 , "prestigeValue" : 0 , "stageValue" : 1 , "sfxBool" : True , "flashingBool" : False , "welcomeMessage" : False , "settingsMessage" : False , "themesMessage" : False , "tutorialMessage" : False , "firstDotMessage" : False , "firstUpgradeMessage" : False , "firstPrestigeMessage" : False , "firstStagePrestigeMessage" : False , "creditsMessage" : False , "stageTwoMessage" : False , "stageThreeMessage" : False , "stageFourMessage" : False , "stageFiveMessage" : False , "easterEggLevelOneMessage" : False , "easterEggLevelTwoMessage" : False , "easterEggLevelThreeMessage" : False , "easterEggLevelFourMessage" : False , "discoMessage" : False , "ambiencePlaying" : False , "discoDuration" : 250}
 dotCount = append(data["dotValue"] , "Dot" , "Dots" , True)
-clickValue = 1
-clickCount = append(clickValue , "DPC" , "DPC" , True)
-clickUpgradeValue = 0
-clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades" , True)
-prestigeValue = 0
-prestigeCount = append(prestigeValue , "Prestige" , "Prestiges" , True)
-stageValue = 1
-stageCount = append("Stage" , stageValue , stageValue , False)
-upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - data["dotValue"]
+clickCount = append(data["clickValue"] , "DPC" , "DPC" , True)
+clickUpgradeCount = append(data["clickUpgradeValue"] , "Click Upgrade" , "Click Upgrades" , True)
+prestigeCount = append(data["prestigeValue"] , "Prestige" , "Prestiges" , True)
+stageCount = append("Stage" , data["stageValue"] , data["stageValue"] , False)
+upgradeRequirement = (((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]) + 1) - data["dotValue"]
 upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade" , True)
-prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - data["dotValue"]
+prestigeRequirement = ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) + 1) - data["dotValue"]
 prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige" , True)
-stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - data["dotValue"])]
+stagePrestigeRequirement = [(9 ** data["stageValue"] + 1) - data["prestigeValue"] , int((((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75) + 1) - data["dotValue"])]
 stagePrestigeRequirementCount = str(append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and " , True)) + str(append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige" , True))
-sfxBool = True
-flashingBool = False
-welcomeMessage = False
-settingsMessage = False
-themesMessage = False
-tutorialMessage = False
-firstDotMessage = False
-firstUpgradeMessage = False
-firstPrestigeMessage = False
-firstStagePrestigeMessage = False
-creditsMessage = False
-stageTwoMessage = False
-stageThreeMessage = False
-stageFourMessage = False
-stageFiveMessage = False
-easterEggLevelOneMessage = False
-easterEggLevelTwoMessage = False
-easterEggLevelThreeMessage = False
-easterEggLevelFourMessage = False
-discoMessage = False
-ambiencePlaying = False
-discoDuration = 250
 statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
 screen = py.display.set_mode((screenWidth , screenHeight))
 py.display.set_icon(py.image.load("Window Icon.png"))
@@ -110,7 +82,7 @@ py.time.set_timer(IDLEDOTGAIN , 50)
 py.time.set_timer(IDLEDPCGAIN , 500)
 py.time.set_timer(IDLEUPGRADE , 10)
 py.time.set_timer(IDLEPRESTIGE , 10)
-py.time.set_timer(SCREENCOLOURCHANGE , discoDuration)
+py.time.set_timer(SCREENCOLOURCHANGE , data["discoDuration"])
 classicDotButton = Button(30 , 30 , 250 , 190 , (0 , 200 , 255))
 classicClickUpgradeButton = Button(30 , 30 , 250 , 230 , (200 , 255 , 0))
 classicPrestigeButton = Button(30 , 30 , 250 , 270 , (255 , 0 , 0))
@@ -366,15 +338,15 @@ abyssDiscoObjects.add(yangYinBackButton , yinYangBackButtonText)
 programRunning = True
 while programRunning:
     mouseX , mouseY = py.mouse.get_pos()
-    if level == "Menu":
-        if welcomeMessage == False:
-            welcomeMessage = True
-            if sfxBool == True:
+    if data["level"] == "Menu":
+        if data["welcomeMessage"] == False:
+            data["welcomeMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Welcome" , "Hello! This is the Menu. You can select your theme first, or go straight into the gameplay. See you there!")
-            if sfxBool == True:
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
@@ -385,74 +357,74 @@ while programRunning:
             if mouseX > classicStartButton.rect.left and mouseX < classicStartButton.rect.right and mouseY > classicStartButton.rect.top and mouseY < classicStartButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Game"
+                    data["level"] = "Game"
             elif mouseX > classicSettingsButton.rect.left and mouseX < classicSettingsButton.rect.right and mouseY > classicSettingsButton.rect.top and mouseY < classicSettingsButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Settings"
+                    data["level"] = "Settings"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
-        if theme == "Classic":
+        if data["theme"] == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicMenuObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             screen.fill((0 , 0 , 0))
             for object in yinYangMenuObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinMenuObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Classicish":
+        elif data["theme"] == "Classicish":
             screen.fill((255 , 0 , 255))
             for object in classicishMenuObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             screen.fill((0 , 255 , 0))
             for object in invertedishMenuObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             screen.fill((0 , 255 , 0))
             for object in invertedMenuObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             screen.fill((0 , 0 , 0))
             for object in abyssMenuObjects:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
-    elif level == "Settings":
-        if settingsMessage == False:
-            settingsMessage = True
-            if sfxBool == True:
+    elif data["level"] == "Settings":
+        if data["settingsMessage"] == False:
+            data["settingsMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
@@ -463,29 +435,29 @@ while programRunning:
             if mouseX > classicThemesButton.rect.left and mouseX < classicThemesButton.rect.right and mouseY > classicThemesButton.rect.top and mouseY < classicThemesButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Themes"
+                    data["level"] = "Themes"
             elif mouseX > classicCreditsButton.rect.left and mouseX < classicCreditsButton.rect.right and mouseY > classicCreditsButton.rect.top and mouseY < classicCreditsButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Credits"
+                    data["level"] = "Credits"
             elif mouseX > classicFactoryResetButton.rect.left and mouseX < classicFactoryResetButton.rect.right and mouseY > classicFactoryResetButton.rect.top and mouseY < classicFactoryResetButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
@@ -494,30 +466,30 @@ while programRunning:
                         py.mixer.music.play()
                     choice = ms.askquestion("Factory Reset" , "Are you sure you want to initiate a factory reset? This resets every stat in game, thus making it like you just started playing.")
                     if choice == "yes":
-                        if sfxBool == True:
+                        if data["sfxBool"] == True:
                             py.mixer.music.load("Message.wav")
                             py.mixer.music.set_volume(0.4)
                             py.mixer.music.play()
                         secondChoice = ms.askquestion("Factory Reset" , "You have chosen wrongly. I'll give you a second chance. Do you want to cancel?")
                         if secondChoice == "no":
-                            if sfxBool == True:
+                            if data["sfxBool"] == True:
                                 py.mixer.music.load("Message.wav")
                                 py.mixer.music.set_volume(0.4)
                                 py.mixer.music.play()
                             ms.showinfo("Factory Reset" , "Sadly, you will now start all over again. This is why I didn't mention the second option in the Settings.")
                             data["dotValue"] = 0
-                            clickValue = 1
-                            clickUpgradeValue = 0
-                            prestigeValue = 0
-                            stageValue = 1
+                            data["clickValue"] = 1
+                            data["clickUpgradeValue"] = 0
+                            data["prestigeValue"] = 0
+                            data["stageValue"] = 1
                         else:
-                            if sfxBool == True:
+                            if data["sfxBool"] == True:
                                 py.mixer.music.load("Message.wav")
                                 py.mixer.music.set_volume(0.4)
                                 py.mixer.music.play()
                             ms.showinfo("Cancellation" , "That was a good choice you made at the last second.")
                     else:
-                        if sfxBool == True:
+                        if data["sfxBool"] == True:
                             py.mixer.music.load("Message.wav")
                             py.mixer.music.set_volume(0.4)
                             py.mixer.music.play()
@@ -525,68 +497,68 @@ while programRunning:
             elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Menu"
+                    data["level"] = "Menu"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
-        if theme == "Classic":
+        if data["theme"] == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicSettingsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             screen.fill((0 , 0 , 0))
             for object in yinYangSettingsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinSettingsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Classicish":
+        elif data["theme"] == "Classicish":
             screen.fill((255 , 0 , 255))
             for object in classicishSettingsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             screen.fill((0 , 255 , 0))
             for object in invertedishSettingsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             screen.fill((0 , 255 , 0))
             for object in invertedSettingsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             screen.fill((0 , 0 , 0))
             for object in abyssSettingsObjects:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
-    elif level == "Credits":
-        if creditsMessage == False:
-            creditsMessage = True
-            if sfxBool == True:
+    elif data["level"] == "Credits":
+        if data["creditsMessage"] == False:
+            data["creditsMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Credits" , "Credits to Mixit for their sound effects, and Arulo for their ambience music. Their website is at https://mixit.co, their sound efffects page can be found at https://mixit.co/free-sound-effects/, and their stock music can be found at https://mixkit.co/free-stock-music/.")
-            if sfxBool == True:
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
@@ -597,66 +569,66 @@ while programRunning:
             if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Settings"
-                    creditsMessage = False
+                    data["level"] = "Settings"
+                    data["creditsMessage"] = False
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
                 if event.key == py.K_BACKSLASH:
-                    level = "Easter Egg Level One"
-        if theme == "Classic":
+                    data["level"] = "Easter Egg Level One"
+        if data["theme"] == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicCreditsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             screen.fill((0 , 0 , 0))
             for object in yinYangCreditsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinCreditsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Classicish":
+        elif data["theme"] == "Classicish":
             screen.fill((255 , 0 , 255))
             for object in classicishCreditsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             screen.fill((0 , 255 , 0))
             for object in invertedishCreditsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             screen.fill((0 , 255 , 0))
             for object in invertedCreditsObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             screen.fill((0 , 0 , 0))
             for object in abyssCreditsObjects:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
-    elif level == "Themes":
-        if themesMessage == False:
-            themesMessage = True
-            if sfxBool == True:
+    elif data["level"] == "Themes":
+        if data["themesMessage"] == False:
+            data["themesMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
@@ -667,134 +639,134 @@ while programRunning:
             if mouseX > classicClassicButton.rect.left and mouseX < classicClassicButton.rect.right and mouseY > classicClassicButton.rect.top and mouseY < classicClassicButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    theme = "Classic"
+                    data["theme"] = "Classic"
             elif mouseX > classicYinYangButton.rect.left and mouseX < classicYinYangButton.rect.right and mouseY > classicYinYangButton.rect.top and mouseY < classicYinYangButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    theme = "Yin Yang"
+                    data["theme"] = "Yin Yang"
             elif mouseX > classicYangYinButton.rect.left and mouseX < classicYangYinButton.rect.right and mouseY > classicYangYinButton.rect.top and mouseY < classicYangYinButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    theme = "Yang Yin"
+                    data["theme"] = "Yang Yin"
             elif mouseX > classicClassicishButton.rect.left and mouseX < classicClassicishButton.rect.right and mouseY > classicClassicishButton.rect.top and mouseY < classicClassicishButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    theme = "Classicish"
+                    data["theme"] = "Classicish"
             elif mouseX > classicInvertedishButton.rect.left and mouseX < classicInvertedishButton.rect.right and mouseY > classicInvertedishButton.rect.top and mouseY < classicInvertedishButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    theme = "Invertedish"
+                    data["theme"] = "Invertedish"
             elif mouseX > classicInvertedButton.rect.left and mouseX < classicInvertedButton.rect.right and mouseY > classicInvertedButton.rect.top and mouseY < classicInvertedButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    theme = "Inverted"
+                    data["theme"] = "Inverted"
             elif mouseX > classicAbyssButton.rect.left and mouseX < classicAbyssButton.rect.right and mouseY > classicAbyssButton.rect.top and mouseY < classicAbyssButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    theme = "Abyss"
+                    data["theme"] = "Abyss"
             elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Settings"
+                    data["level"] = "Settings"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
-        if theme == "Classic":
+        if data["theme"] == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicThemesObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             screen.fill((0 , 0 , 0))
             for object in yinYangThemesObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinThemesObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Classicish":
+        elif data["theme"] == "Classicish":
             screen.fill((255 , 0 , 255))
             for object in classicishThemesObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             screen.fill((0 , 255 , 0))
             for object in invertedishThemesObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             screen.fill((0 , 255 , 0))
             for object in invertedThemesObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             screen.fill((0 , 0 , 0))
             for object in abyssThemesObjects:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
-    elif level == "Game":
-        if tutorialMessage == False:
-            tutorialMessage = True
-            if sfxBool == True:
+    elif data["level"] == "Game":
+        if data["tutorialMessage"] == False:
+            data["tutorialMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Tutorial" , "Hello! This is a minimalistic cookie clicker made for the Hack Club Arcade.")
-            if sfxBool == True:
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Tutorial" , "For now, you have to collect as many dots as possible.")
-            if sfxBool == True:
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Tutorial" , "That blue button you'll see shortly increments the amount of dots you have by 1 every time you press it.")
-            if sfxBool == True:
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
@@ -805,171 +777,171 @@ while programRunning:
             if mouseX > classicDotButton.rect.left and mouseX < classicDotButton.rect.right and mouseY > classicDotButton.rect.top and mouseY < classicDotButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    data["dotValue"] = data["dotValue"] + clickValue
+                    data["dotValue"] = data["dotValue"] + data["clickValue"]
             elif mouseX > classicClickUpgradeButton.rect.left and mouseX < classicClickUpgradeButton.rect.right and mouseY > classicClickUpgradeButton.rect.top and mouseY < classicClickUpgradeButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
-                        clickValue = (clickValue + 1) * (prestigeValue + 1)
-                        clickUpgradeValue = clickUpgradeValue + 1
+                    if data["dotValue"] > ((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]):
+                        data["clickValue"] = (data["clickValue"] + 1) * (data["prestigeValue"] + 1)
+                        data["clickUpgradeValue"] = data["clickUpgradeValue"] + 1
             elif mouseX > classicPrestigeButton.rect.left and mouseX < classicPrestigeButton.rect.right and mouseY > classicPrestigeButton.rect.top and mouseY < classicPrestigeButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
-                        prestigeValue = prestigeValue + 1
+                    if data["dotValue"] > ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) * data["stageValue"]):
+                        data["prestigeValue"] = data["prestigeValue"] + 1
                         data["dotValue"] = 0
-                        clickValue = 1
-                        clickUpgradeValue = 0
+                        data["clickValue"] = 1
+                        data["clickUpgradeValue"] = 0
             elif mouseX > classicStagePrestigeButton.rect.left and mouseX < classicStagePrestigeButton.rect.right and mouseY > classicStagePrestigeButton.rect.top and mouseY < classicStagePrestigeButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
-                        stageValue = stageValue + 1
-                        prestigeValue = 0
+                    if data["prestigeValue"] > (9 ** data["stageValue"]) and data["dotValue"] > int((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75):
+                        data["stageValue"] = data["stageValue"] + 1
+                        data["prestigeValue"] = 0
                         data["dotValue"] = 0
-                        clickValue = 1
-                        clickUpgradeValue = 0
+                        data["clickValue"] = 1
+                        data["clickUpgradeValue"] = 0
             elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Menu"
+                    data["level"] = "Menu"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
                 if event.key == py.K_SPACE:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                     ms.showinfo("Statistics" , statistics)
             if event.type == IDLEDOTGAIN:
-                if stageValue > 1:
-                    data["dotValue"] = data["dotValue"] + clickValue
+                if data["stageValue"] > 1:
+                    data["dotValue"] = data["dotValue"] + data["clickValue"]
             if event.type == IDLEDPCGAIN:
-                if stageValue > 2:
-                    clickValue = round(clickValue * 1.5)
+                if data["stageValue"] > 2:
+                    data["clickValue"] = round(data["clickValue"] * 1.5)
             if event.type == IDLEUPGRADE:
-                if stageValue > 3:
-                    if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
-                        clickValue = (clickValue + 1) * (prestigeValue + 1)
-                        clickUpgradeValue = clickUpgradeValue + 1
+                if data["stageValue"] > 3:
+                    if data["dotValue"] > ((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]):
+                        data["clickValue"] = (data["clickValue"] + 1) * (data["prestigeValue"] + 1)
+                        data["clickUpgradeValue"] = data["clickUpgradeValue"] + 1
             if event.type == IDLEPRESTIGE:
-                if stageValue > 4:
-                    if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
-                        prestigeValue = prestigeValue + 1
+                if data["stageValue"] > 4:
+                    if data["dotValue"] > ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) * data["stageValue"]):
+                        data["prestigeValue"] = data["prestigeValue"] + 1
                         data["dotValue"] = 0
-                        clickValue = 1
-                        clickUpgradeValue = 0
-        if data["dotValue"] > 0 and firstDotMessage == False:
-            firstDotMessage = True
-            if sfxBool == True:
+                        data["clickValue"] = 1
+                        data["clickUpgradeValue"] = 0
+        if data["dotValue"] > 0 and data["firstDotMessage"] == False:
+            data["firstDotMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Starting Off" , "You've gained your first dot. You can earn more, and once you have a substantial amount, you'll get another message like this one.")
-        if data["dotValue"] > 100 and firstUpgradeMessage == False:
-            firstUpgradeMessage = True
-            if sfxBool == True:
+        if data["dotValue"] > 100 and data["firstUpgradeMessage"] == False:
+            data["firstUpgradeMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Upgrades" , "You've reached your first upgrade. When you press that yellow button that you will see shortly, your Dots Per Click (DPC) value will increment by one. This changes how many dots you earn per click.")
-            if sfxBool == True:
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Statistics" , "To see some statistics, you can press the Space key on your keyboard.")
-        if data["dotValue"] > 11250 and firstPrestigeMessage == False:
-            firstPrestigeMessage = True
-            if sfxBool == True:
+        if data["dotValue"] > 11250 and data["firstPrestigeMessage"] == False:
+            data["firstPrestigeMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Prestiges" , "You have reached the point where you can undergo your first prestige. When you press the red button that you will see shortly, you will prestige. This means that all of your statistics, including your dots and DPC will be reset to 0 and 1 respectively. Things like how many times you have prestiged will be incremented by one of course, and your stage (you'll learn about that later) will stay the same. Although this seems purely negative, the rate at which your DPC increments will be vastly different (positively), and you will reach more and more dot counts.")
-        if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) and firstStagePrestigeMessage == False:
-            firstStagePrestigeMessage = True
-            if sfxBool == True:
+        if data["prestigeValue"] > (9 ** data["stageValue"]) and data["dotValue"] > int((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75) and data["firstStagePrestigeMessage"] == False:
+            data["firstStagePrestigeMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Stage Prestiges" , "After a long time, you have reached your first stage prestige. Stage prestiges reset everything that prestiges do, as well as your prestige count. On the other hand, your stage increments by one. A stage prestige always automates some part of the game that hasn't been automated before, eventualy allowing full idle gameplay. You can stage prestige by pressing the green button that you will se shortly. There is a suprise in Stage 2.")
-        if stageValue > 1 and stageTwoMessage == False:
-            stageTwoMessage = True
-            if sfxBool == True:
+        if data["stageValue"] > 1 and data["stageTwoMessage"] == False:
+            data["stageTwoMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Stage 2" , "This is the second Stage. As promised, once you progress after reading this message, a part of the game will be automated. Good luck.")
-        if stageValue > 2 and stageThreeMessage == False:
-            stageThreeMessage = True
-            if sfxBool == True:
+        if data["stageValue"] > 2 and data["stageThreeMessage"] == False:
+            data["stageThreeMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Stage 3" , "You should have gotten the gist by now. Last time, Idle Dot Gain was implemented. Now, something else will be automated. See you in Stage 4.")
-        if stageValue > 3 and stageFourMessage == False:
-            stageFourMessage = True
-            if sfxBool == True:
+        if data["stageValue"] > 3 and data["stageFourMessage"] == False:
+            data["stageFourMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Stage 4" , "You have progressed pretty far into the game by now. In Stage 3, Idle DPC Gain was added. As promised previously, something else will be automated. If you make it to Stage 5, see you there.")
-        if stageValue > 4 and stageFiveMessage == False:
-            stageFiveMessage = True
-            if sfxBool == True:
+        if data["stageValue"] > 4 and data["stageFiveMessage"] == False:
+            data["stageFiveMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Stage 5" , "By now, you must have guessed what will be automated next. The next time I see you, there will be something different...")
-        if theme == "Classic":
+        if data["theme"] == "Classic":
             screen.fill((255 , 0 , 255))
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             screen.fill((0 , 0 , 0))
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             screen.fill((255 , 255 , 255))
-        elif theme == "Classicish":
+        elif data["theme"] == "Classicish":
             screen.fill((255 , 0 , 255))
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             screen.fill((0 , 255 , 0))
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             screen.fill((0 , 255 , 0))
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             screen.fill((0 , 0 , 0))
         classicGameObjects.remove(classicDotCounter)
         yinYangGameObjects.remove(classicDotCounter)
@@ -978,14 +950,14 @@ while programRunning:
         invertedishGameObjects.remove(classicDotCounter)
         invertedGameObjects.remove(yangYinDotCounter)
         abyssGameObjects.remove(yangYinDotCounter)
-        upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - data["dotValue"]
-        prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - data["dotValue"]
-        stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - data["dotValue"])]
+        upgradeRequirement = (((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]) + 1) - data["dotValue"]
+        prestigeRequirement = ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) + 1) - data["dotValue"]
+        stagePrestigeRequirement = [(9 ** data["stageValue"] + 1) - data["prestigeValue"] , int((((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75) + 1) - data["dotValue"])]
         dotCount = append(data["dotValue"] , "Dot" , "Dots" , True)
-        clickCount = append(clickValue , "DPC" , "DPC" , True)
-        stageCount = append("Stage" , stageValue , stageValue , False)
-        clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades" , True)
-        prestigeCount = append(prestigeValue , "Prestige" , "Prestiges" , True)
+        clickCount = append(data["clickValue"] , "DPC" , "DPC" , True)
+        stageCount = append("Stage" , data["stageValue"] , data["stageValue"] , False)
+        clickUpgradeCount = append(data["clickUpgradeValue"] , "Click Upgrade" , "Click Upgrades" , True)
+        prestigeCount = append(data["prestigeValue"] , "Prestige" , "Prestiges" , True)
         upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade" , True)
         prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige" , True)
         stagePrestigeRequirementCount = append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and " , True) + append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige" , True) 
@@ -999,74 +971,74 @@ while programRunning:
         invertedishGameObjects.add(classicDotCounter)
         invertedGameObjects.add(yangYinDotCounter)
         abyssGameObjects.add(yangYinDotCounter)
-        if theme == "Classic":
+        if data["theme"] == "Classic":
             for object in classicGameObjects:
                 screen.blit(object.surface , object.rect)
-            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]):
                 screen.blit(classicClickUpgradeButton.surface , classicClickUpgradeButton.rect)
-            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) * data["stageValue"]):
                 screen.blit(classicPrestigeButton.surface , classicPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if data["prestigeValue"] > (9 ** data["stageValue"]) and data["dotValue"] > int((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75):
                 screen.blit(classicStagePrestigeButton.surface , classicStagePrestigeButton.rect)
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             for object in yinYangGameObjects:
                 screen.blit(object.surface , object.rect)
-            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]):
                 screen.blit(yinYangClickUpgradeButton.surface , yinYangClickUpgradeButton.rect)
-            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) * data["stageValue"]):
                 screen.blit(yinYangPrestigeButton.surface , yinYangPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if data["prestigeValue"] > (9 ** data["stageValue"]) and data["dotValue"] > int((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75):
                 screen.blit(yinYangStagePrestigeButton.surface , yinYangStagePrestigeButton.rect)
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             for object in yangYinGameObjects:
                 screen.blit(object.surface , object.rect)
-            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]):
                 screen.blit(yangYinClickUpgradeButton.surface , yangYinClickUpgradeButton.rect)
-            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) * data["stageValue"]):
                 screen.blit(yangYinPrestigeButton.surface , yangYinPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if data["prestigeValue"] > (9 ** data["stageValue"]) and data["dotValue"] > int((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75):
                 screen.blit(yangYinStagePrestigeButton.surface , yangYinStagePrestigeButton.rect)
-        elif theme == "Classicish":            
+        elif data["theme"] == "Classicish":            
             for object in classicishGameObjects:
                 screen.blit(object.surface , object.rect)
-            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]):
                 screen.blit(classicClickUpgradeButton.surface , classicClickUpgradeButton.rect)
-            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) * data["stageValue"]):
                 screen.blit(classicPrestigeButton.surface , classicPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if data["prestigeValue"] > (9 ** data["stageValue"]) and data["dotValue"] > int((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75):
                 screen.blit(classicStagePrestigeButton.surface , classicStagePrestigeButton.rect)
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             for object in invertedishGameObjects:
                 screen.blit(object.surface , object.rect)
-            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]):
                 screen.blit(invertedishClickUpgradeButton.surface , invertedishClickUpgradeButton.rect)
-            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) * data["stageValue"]):
                 screen.blit(invertedishPrestigeButton.surface , invertedishPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if data["prestigeValue"] > (9 ** data["stageValue"]) and data["dotValue"] > int((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75):
                 screen.blit(invertedishStagePrestigeButton.surface , invertedishStagePrestigeButton.rect)
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             for object in invertedGameObjects:
                 screen.blit(object.surface , object.rect)
-            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]):
                 screen.blit(invertedishClickUpgradeButton.surface , invertedishClickUpgradeButton.rect)
-            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) * data["stageValue"]):
                 screen.blit(invertedishPrestigeButton.surface , invertedishPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if data["prestigeValue"] > (9 ** data["stageValue"]) and data["dotValue"] > int((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75):
                 screen.blit(invertedishStagePrestigeButton.surface , invertedishStagePrestigeButton.rect)
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             for object in abyssGameObjects:
                 screen.blit(object.surface , object.rect)
-            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (data["clickUpgradeValue"] + 2)) * data["stageValue"]):
                 screen.blit(yangYinClickUpgradeButton.surface , yangYinClickUpgradeButton.rect)
-            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((data["prestigeValue"] + 1) ** data["prestigeValue"])) * data["stageValue"]):
                 screen.blit(yangYinPrestigeButton.surface , yangYinPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if data["prestigeValue"] > (9 ** data["stageValue"]) and data["dotValue"] > int((15000 * (((9 ** data["stageValue"] + 1)) ** (9 ** data["stageValue"]))) * 0.75):
                 screen.blit(yangYinStagePrestigeButton.surface , yangYinStagePrestigeButton.rect)
         py.display.flip()
-    elif level == "Easter Egg Level One":
-        if easterEggLevelOneMessage == False:
-            easterEggLevelOneMessage = True
-            if sfxBool == True:
+    elif data["level"] == "Easter Egg Level One":
+        if data["easterEggLevelOneMessage"] == False:
+            data["easterEggLevelOneMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
@@ -1077,74 +1049,74 @@ while programRunning:
             if mouseX > classicEasterEggLvlOne.rect.left and mouseX < classicEasterEggLvlOne.rect.right and mouseY > classicEasterEggLvlOne.rect.top and mouseY < classicEasterEggLvlOne.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Easter Egg Level Two"
+                    data["level"] = "Easter Egg Level Two"
             elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Credits"
+                    data["level"] = "Credits"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
-        if theme == "Classic":
+        if data["theme"] == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicEasterEggLvlOneObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             screen.fill((0 , 0 , 0))
             for object in yinYangEasterEggLvlOneObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinEasterEggLvlOneObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Classicish":
+        elif data["theme"] == "Classicish":
             screen.fill((255 , 0 , 255))
             for object in classicishEasterEggLvlOneObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             screen.fill((0 , 255 , 0))
             for object in invertedishEasterEggLvlOneObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             screen.fill((0 , 255 , 0))
             for object in invertedEasterEggLvlOneObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             screen.fill((0 , 0 , 0))
             for object in abyssEasterEggLvlOneObjects:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
-    elif level == "Easter Egg Level Two":
-        if easterEggLevelTwoMessage == False:
-            easterEggLevelTwoMessage = True
-            if sfxBool == True:
+    elif data["level"] == "Easter Egg Level Two":
+        if data["easterEggLevelTwoMessage"] == False:
+            data["easterEggLevelTwoMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
@@ -1155,74 +1127,74 @@ while programRunning:
             if mouseX > classicEasterEggLvlTwo.rect.left and mouseX < classicEasterEggLvlTwo.rect.right and mouseY > classicEasterEggLvlTwo.rect.top and mouseY < classicEasterEggLvlTwo.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Easter Egg Level Three"
+                    data["level"] = "Easter Egg Level Three"
             elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Easter Egg Level One"
+                    data["level"] = "Easter Egg Level One"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
-        if theme == "Classic":
+        if data["theme"] == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicEasterEggLvlTwoObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             screen.fill((0 , 0 , 0))
             for object in yinYangEasterEggLvlTwoObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinEasterEggLvlTwoObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Classicish":
+        elif data["theme"] == "Classicish":
             screen.fill((255 , 0 , 255))
             for object in classicishEasterEggLvlTwoObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             screen.fill((0 , 255 , 0))
             for object in invertedishEasterEggLvlTwoObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             screen.fill((0 , 255 , 0))
             for object in invertedEasterEggLvlTwoObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             screen.fill((0 , 0 , 0))
             for object in abyssEasterEggLvlTwoObjects:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
-    elif level == "Easter Egg Level Three":
-        if easterEggLevelThreeMessage == False:
-            easterEggLevelThreeMessage = True
-            if sfxBool == True:
+    elif data["level"] == "Easter Egg Level Three":
+        if data["easterEggLevelThreeMessage"] == False:
+            data["easterEggLevelThreeMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
@@ -1233,74 +1205,74 @@ while programRunning:
             if mouseX > classicEasterEggLvlThree.rect.left and mouseX < classicEasterEggLvlThree.rect.right and mouseY > classicEasterEggLvlThree.rect.top and mouseY < classicEasterEggLvlThree.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Easter Egg Level Four"
+                    data["level"] = "Easter Egg Level Four"
             elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Easter Egg Level Two"
+                    data["level"] = "Easter Egg Level Two"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
-        if theme == "Classic":
+        if data["theme"] == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicEasterEggLvlThreeObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             screen.fill((0 , 0 , 0))
             for object in yinYangEasterEggLvlThreeObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinEasterEggLvlThreeObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Classicish":
+        elif data["theme"] == "Classicish":
             screen.fill((255 , 0 , 255))
             for object in classicishEasterEggLvlThreeObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             screen.fill((0 , 255 , 0))
             for object in invertedishEasterEggLvlThreeObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             screen.fill((0 , 255 , 0))
             for object in invertedEasterEggLvlThreeObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             screen.fill((0 , 0 , 0))
             for object in abyssEasterEggLvlThreeObjects:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
-    elif level == "Easter Egg Level Four":
+    elif data["level"] == "Easter Egg Level Four":
         py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
-        if easterEggLevelFourMessage == False:
-            easterEggLevelFourMessage = True
-            if sfxBool == True:
+        if data["easterEggLevelFourMessage"] == False:
+            data["easterEggLevelFourMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
@@ -1310,88 +1282,88 @@ while programRunning:
                 programRunning = False
             if mouseX > classicEasterEggLvlFour.rect.left and mouseX < classicEasterEggLvlFour.rect.right and mouseY > classicEasterEggLvlFour.rect.top and mouseY < classicEasterEggLvlFour.rect.bottom:
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Disco"
+                    data["level"] = "Disco"
             elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    level = "Easter Egg Level Three"
+                    data["level"] = "Easter Egg Level Three"
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
-        if theme == "Classic":
+        if data["theme"] == "Classic":
             screen.fill((255 , 0 , 255))
             for object in classicDiscoObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yin Yang":
+        elif data["theme"] == "Yin Yang":
             screen.fill((0 , 0 , 0))
             for object in yinYangEasterEggLvlFourObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Yang Yin":
+        elif data["theme"] == "Yang Yin":
             screen.fill((255 , 255 , 255))
             for object in yangYinEasterEggLvlFourObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Classicish":
+        elif data["theme"] == "Classicish":
             screen.fill((255 , 0 , 255))
             for object in classicishEasterEggLvlFourObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Invertedish":
+        elif data["theme"] == "Invertedish":
             screen.fill((0 , 255 , 0))
             for object in invertedishEasterEggLvlFourObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Inverted":
+        elif data["theme"] == "Inverted":
             screen.fill((0 , 255 , 0))
             for object in invertedEasterEggLvlFourObjects:
                 screen.blit(object.surface , object.rect)
-        elif theme == "Abyss":
+        elif data["theme"] == "Abyss":
             screen.fill((0 , 0 , 0))
             for object in abyssEasterEggLvlFourObjects:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
-    elif level == "Disco":
-        if ambiencePlaying == False and sfxBool == True:
-            ambiencePlaying = True
+    elif data["level"] == "Disco":
+        if data["ambiencePlaying"] == False and data["sfxBool"] == True:
+            data["ambiencePlaying"] = True
             py.mixer.music.load("Ambience.mp3")
             py.mixer.music.set_volume(0.5)
             py.mixer.music.play(-1)
         randomColour = (rd.randint(0 , 255) , rd.randint(0 , 255) , rd.randint(0 , 255))
-        if discoMessage == False:
-            discoMessage = True
-            if sfxBool == True:
+        if data["discoMessage"] == False:
+            data["discoMessage"] = True
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
-                ambiencePlaying = False
+                data["ambiencePlaying"] = False
             ms.showinfo("The Disco" , "Your persistence and stubborness paid off. You have entered the disco. If you have epilepsy or feel uncomfortable with flashing lights, do not press the Slash key, as it toggles the flashing lights on and off. If you don't need to worry about that, you can press the Slash key to get fully immersed into the disco. You can also use the key to keep the background on a colour that you like.")
-            if sfxBool == True:
+            if data["sfxBool"] == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
-                ambiencePlaying = False
+                data["ambiencePlaying"] = False
             ms.showinfo("Some Settings" , "If you wanna change how long it takes for the screen to change colour, you can use the Comma and Period keys to change that. They change based on how small it currently takes for your screen to change colour")
         for event in py.event.get():
             if event.type == py.QUIT:
@@ -1399,67 +1371,69 @@ while programRunning:
             if mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
-                    if sfxBool == True:
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                        ambiencePlaying = False
-                    level = "Easter Egg Level Four"
+                        data["ambiencePlaying"] = False
+                    data["level"] = "Easter Egg Level Four"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
             if event.type == py.KEYDOWN:
                 if event.key == py.K_ESCAPE:
-                    if sfxBool == True:
-                        sfxBool = False
+                    if data["sfxBool"] == True:
+                        data["sfxBool"] = False
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                        ambiencePlaying = False
+                        data["ambiencePlaying"] = False
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
-                    elif sfxBool == False:
-                        sfxBool = True
+                    elif data["sfxBool"] == False:
+                        data["sfxBool"] = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                        ambiencePlaying = False
+                        data["ambiencePlaying"] = False
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
                 if event.key == py.K_SLASH:
-                    if flashingBool == True:
-                        flashingBool = False
-                    elif flashingBool == False:
-                        flashingBool = True
+                    if data["flashingBool"] == True:
+                        data["flashingBool"] = False
+                    elif data["flashingBool"] == False:
+                        data["flashingBool"] = True
                 if event.key == py.K_COMMA:
-                    discoDuration = discoDuration + 50
-                    screenFlashCount = "Your screen flashes every " + str(discoDuration) + " milliseconds"
-                    py.time.set_timer(SCREENCOLOURCHANGE , discoDuration)
-                    if sfxBool == True:
+                    data["discoDuration"] = data["discoDuration"] + 50
+                    screenFlashCount = "Your screen flashes every " + str(data["discoDuration"]) + " milliseconds"
+                    py.time.set_timer(SCREENCOLOURCHANGE , data["discoDuration"])
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                        ambiencePlaying = False
+                        data["ambiencePlaying"] = False
                     ms.showinfo("Screen Flash" , screenFlashCount)
                 if event.key == py.K_PERIOD:
-                    if discoDuration > 99:
-                        discoDuration = discoDuration - 50
-                    elif discoDuration > 19:
-                        discoDuration = discoDuration - 5
-                    elif discoDuration > 0:
-                        discoDuration = discoDuration - 1
-                    screenFlashCount = "Your screen flashes every " + str(discoDuration) + " milliseconds"
-                    py.time.set_timer(SCREENCOLOURCHANGE , discoDuration)
-                    if sfxBool == True:
+                    if data["discoDuration"] > 99:
+                        data["discoDuration"] = data["discoDuration"] - 50
+                    elif data["discoDuration"] > 19:
+                        data["discoDuration"] = data["discoDuration"] - 5
+                    elif data["discoDuration"] > 0:
+                        data["discoDuration"] = data["discoDuration"] - 1
+                    screenFlashCount = "Your screen flashes every " + str(data["discoDuration"]) + " milliseconds"
+                    py.time.set_timer(SCREENCOLOURCHANGE , data["discoDuration"])
+                    if data["sfxBool"] == True:
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                        ambiencePlaying = False
+                        data["ambiencePlaying"] = False
                     ms.showinfo("Screen Flash" , screenFlashCount)
-            if event.type == SCREENCOLOURCHANGE and flashingBool == True:
+            if event.type == SCREENCOLOURCHANGE and data["flashingBool"] == True:
                 randomColour = (rd.randint(0 , 255) , rd.randint(0 , 255) , rd.randint(0 , 255))
                 screen.fill(randomColour)
         for object in classicDiscoObjects:
             screen.blit(object.surface , object.rect)
         py.display.flip()
 py.quit()
+with open("data.txt" , "w") as clickfinityData:
+    json.dump(data , clickfinityData)
