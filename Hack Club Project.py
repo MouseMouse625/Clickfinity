@@ -72,7 +72,7 @@ stagePrestigeRequirementCount = str(append(stagePrestigeRequirement[0] , "More P
 statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
 screen = py.display.set_mode((screenWidth , screenHeight))
 py.display.set_icon(py.image.load("Window Icon.png"))
-py.display.set_caption("Hack Club Project")
+py.display.set_caption("Clickfinity")
 IDLEDOTGAIN = py.USEREVENT + 1
 IDLEDPCGAIN = py.USEREVENT + 2
 IDLEUPGRADE = py.USEREVENT + 3
