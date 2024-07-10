@@ -1,6 +1,7 @@
 import pygame as py
 from tkinter import messagebox as ms
 import random as rd
+import json
 py.init()
 py.mixer.init()
 class Button(py.sprite.Sprite):
@@ -56,10 +57,10 @@ def yinYang(object , blackBool):
             return Button(object.width , object.height , object.xPosition , object.yPosition , (0 , 0 , 0))
 screenWidth = 500
 screenHeight = 500
+data = {"dotValue" : 0}
 level = "Disco"
 theme = "Classic"
-dotValue = 0
-dotCount = append(dotValue , "Dot" , "Dots" , True)
+dotCount = append(data["dotValue"] , "Dot" , "Dots" , True)
 clickValue = 1
 clickCount = append(clickValue , "DPC" , "DPC" , True)
 clickUpgradeValue = 0
@@ -68,11 +69,11 @@ prestigeValue = 0
 prestigeCount = append(prestigeValue , "Prestige" , "Prestiges" , True)
 stageValue = 1
 stageCount = append("Stage" , stageValue , stageValue , False)
-upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - dotValue
+upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - data["dotValue"]
 upgradeRequirementCount = append(upgradeRequirement , "More Dot Needed For The Next Upgrade" , "More Dots Needed For The Next Upgrade" , True)
-prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - dotValue
+prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - data["dotValue"]
 prestigeRequirementCount = append(prestigeRequirement , "More Dot Needed For The Next Prestige" , "More Dots Needed For The Next Prestige" , True)
-stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - dotValue)]
+stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - data["dotValue"])]
 stagePrestigeRequirementCount = str(append(stagePrestigeRequirement[0] , "More Prestige and " , "More Prestiges and " , True)) + str(append(stagePrestigeRequirement[1] , "More Dot Needed For The Next Stage Prestige" , "More Dots Needed For The Next Stage Prestige" , True))
 sfxBool = True
 flashingBool = False
@@ -94,6 +95,7 @@ easterEggLevelTwoMessage = False
 easterEggLevelThreeMessage = False
 easterEggLevelFourMessage = False
 discoMessage = False
+ambiencePlaying = False
 discoDuration = 250
 statistics = dotCount + "\n" + clickCount + "\n" + clickUpgradeCount + "\n" + stageCount + "\n" + upgradeRequirementCount + "\n" + prestigeRequirementCount + "\n" + stagePrestigeRequirementCount
 screen = py.display.set_mode((screenWidth , screenHeight))
@@ -503,7 +505,7 @@ while programRunning:
                                 py.mixer.music.set_volume(0.4)
                                 py.mixer.music.play()
                             ms.showinfo("Factory Reset" , "Sadly, you will now start all over again. This is why I didn't mention the second option in the Settings.")
-                            dotValue = 0
+                            data["dotValue"] = 0
                             clickValue = 1
                             clickUpgradeValue = 0
                             prestigeValue = 0
@@ -583,7 +585,7 @@ while programRunning:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
-            ms.showinfo("Credits" , "Credits to Mixit for their sound effects. Their website is at https://mixit.co , and their sound efffects page can be found at https://mixit.co/free-sound-effects/")
+            ms.showinfo("Credits" , "Credits to Mixit for their sound effects, and Arulo for their ambience music. Their website is at https://mixit.co, their sound efffects page can be found at https://mixit.co/free-sound-effects/, and their stock music can be found at https://mixkit.co/free-stock-music/.")
             if sfxBool == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
@@ -807,7 +809,7 @@ while programRunning:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    dotValue = dotValue + clickValue
+                    data["dotValue"] = data["dotValue"] + clickValue
             elif mouseX > classicClickUpgradeButton.rect.left and mouseX < classicClickUpgradeButton.rect.right and mouseY > classicClickUpgradeButton.rect.top and mouseY < classicClickUpgradeButton.rect.bottom:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_HAND)
                 if event.type == py.MOUSEBUTTONDOWN:
@@ -815,7 +817,7 @@ while programRunning:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+                    if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                         clickValue = (clickValue + 1) * (prestigeValue + 1)
                         clickUpgradeValue = clickUpgradeValue + 1
             elif mouseX > classicPrestigeButton.rect.left and mouseX < classicPrestigeButton.rect.right and mouseY > classicPrestigeButton.rect.top and mouseY < classicPrestigeButton.rect.bottom:
@@ -825,9 +827,9 @@ while programRunning:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+                    if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                         prestigeValue = prestigeValue + 1
-                        dotValue = 0
+                        data["dotValue"] = 0
                         clickValue = 1
                         clickUpgradeValue = 0
             elif mouseX > classicStagePrestigeButton.rect.left and mouseX < classicStagePrestigeButton.rect.right and mouseY > classicStagePrestigeButton.rect.top and mouseY < classicStagePrestigeButton.rect.bottom:
@@ -837,10 +839,10 @@ while programRunning:
                         py.mixer.music.load("Click.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
-                    if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+                    if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                         stageValue = stageValue + 1
                         prestigeValue = 0
-                        dotValue = 0
+                        data["dotValue"] = 0
                         clickValue = 1
                         clickUpgradeValue = 0
             elif mouseX > classicBackButton.rect.left and mouseX < classicBackButton.rect.right and mouseY > classicBackButton.rect.top and mouseY < classicBackButton.rect.bottom:
@@ -878,30 +880,30 @@ while programRunning:
                     ms.showinfo("Statistics" , statistics)
             if event.type == IDLEDOTGAIN:
                 if stageValue > 1:
-                    dotValue = dotValue + clickValue
+                    data["dotValue"] = data["dotValue"] + clickValue
             if event.type == IDLEDPCGAIN:
                 if stageValue > 2:
                     clickValue = round(clickValue * 1.5)
             if event.type == IDLEUPGRADE:
                 if stageValue > 3:
-                    if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+                    if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                         clickValue = (clickValue + 1) * (prestigeValue + 1)
                         clickUpgradeValue = clickUpgradeValue + 1
             if event.type == IDLEPRESTIGE:
                 if stageValue > 4:
-                    if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+                    if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                         prestigeValue = prestigeValue + 1
-                        dotValue = 0
+                        data["dotValue"] = 0
                         clickValue = 1
                         clickUpgradeValue = 0
-        if dotValue > 0 and firstDotMessage == False:
+        if data["dotValue"] > 0 and firstDotMessage == False:
             firstDotMessage = True
             if sfxBool == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Starting Off" , "You've gained your first dot. You can earn more, and once you have a substantial amount, you'll get another message like this one.")
-        if dotValue > 100 and firstUpgradeMessage == False:
+        if data["dotValue"] > 100 and firstUpgradeMessage == False:
             firstUpgradeMessage = True
             if sfxBool == True:
                 py.mixer.music.load("Message.wav")
@@ -913,14 +915,14 @@ while programRunning:
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Statistics" , "To see some statistics, you can press the Space key on your keyboard.")
-        if dotValue > 11250 and firstPrestigeMessage == False:
+        if data["dotValue"] > 11250 and firstPrestigeMessage == False:
             firstPrestigeMessage = True
             if sfxBool == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
             ms.showinfo("Prestiges" , "You have reached the point where you can undergo your first prestige. When you press the red button that you will see shortly, you will prestige. This means that all of your statistics, including your dots and DPC will be reset to 0 and 1 respectively. Things like how many times you have prestiged will be incremented by one of course, and your stage (you'll learn about that later) will stay the same. Although this seems purely negative, the rate at which your DPC increments will be vastly different (positively), and you will reach more and more dot counts.")
-        if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) and firstStagePrestigeMessage == False:
+        if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) and firstStagePrestigeMessage == False:
             firstStagePrestigeMessage = True
             if sfxBool == True:
                 py.mixer.music.load("Message.wav")
@@ -976,10 +978,10 @@ while programRunning:
         invertedishGameObjects.remove(classicDotCounter)
         invertedGameObjects.remove(yangYinDotCounter)
         abyssGameObjects.remove(yangYinDotCounter)
-        upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - dotValue
-        prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - dotValue
-        stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - dotValue)]
-        dotCount = append(dotValue , "Dot" , "Dots" , True)
+        upgradeRequirement = (((10 ** (clickUpgradeValue + 2)) * stageValue) + 1) - data["dotValue"]
+        prestigeRequirement = ((15000 * ((prestigeValue + 1) ** prestigeValue)) + 1) - data["dotValue"]
+        stagePrestigeRequirement = [(9 ** stageValue + 1) - prestigeValue , int((((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75) + 1) - data["dotValue"])]
+        dotCount = append(data["dotValue"] , "Dot" , "Dots" , True)
         clickCount = append(clickValue , "DPC" , "DPC" , True)
         stageCount = append("Stage" , stageValue , stageValue , False)
         clickUpgradeCount = append(clickUpgradeValue , "Click Upgrade" , "Click Upgrades" , True)
@@ -1000,65 +1002,65 @@ while programRunning:
         if theme == "Classic":
             for object in classicGameObjects:
                 screen.blit(object.surface , object.rect)
-            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                 screen.blit(classicClickUpgradeButton.surface , classicClickUpgradeButton.rect)
-            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                 screen.blit(classicPrestigeButton.surface , classicPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(classicStagePrestigeButton.surface , classicStagePrestigeButton.rect)
         elif theme == "Yin Yang":
             for object in yinYangGameObjects:
                 screen.blit(object.surface , object.rect)
-            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                 screen.blit(yinYangClickUpgradeButton.surface , yinYangClickUpgradeButton.rect)
-            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                 screen.blit(yinYangPrestigeButton.surface , yinYangPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(yinYangStagePrestigeButton.surface , yinYangStagePrestigeButton.rect)
         elif theme == "Yang Yin":
             for object in yangYinGameObjects:
                 screen.blit(object.surface , object.rect)
-            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                 screen.blit(yangYinClickUpgradeButton.surface , yangYinClickUpgradeButton.rect)
-            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                 screen.blit(yangYinPrestigeButton.surface , yangYinPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(yangYinStagePrestigeButton.surface , yangYinStagePrestigeButton.rect)
         elif theme == "Classicish":            
             for object in classicishGameObjects:
                 screen.blit(object.surface , object.rect)
-            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                 screen.blit(classicClickUpgradeButton.surface , classicClickUpgradeButton.rect)
-            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                 screen.blit(classicPrestigeButton.surface , classicPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(classicStagePrestigeButton.surface , classicStagePrestigeButton.rect)
         elif theme == "Invertedish":
             for object in invertedishGameObjects:
                 screen.blit(object.surface , object.rect)
-            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                 screen.blit(invertedishClickUpgradeButton.surface , invertedishClickUpgradeButton.rect)
-            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                 screen.blit(invertedishPrestigeButton.surface , invertedishPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(invertedishStagePrestigeButton.surface , invertedishStagePrestigeButton.rect)
         elif theme == "Inverted":
             for object in invertedGameObjects:
                 screen.blit(object.surface , object.rect)
-            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                 screen.blit(invertedishClickUpgradeButton.surface , invertedishClickUpgradeButton.rect)
-            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                 screen.blit(invertedishPrestigeButton.surface , invertedishPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(invertedishStagePrestigeButton.surface , invertedishStagePrestigeButton.rect)
         elif theme == "Abyss":
             for object in abyssGameObjects:
                 screen.blit(object.surface , object.rect)
-            if dotValue > ((10 ** (clickUpgradeValue + 2)) * stageValue):
+            if data["dotValue"] > ((10 ** (clickUpgradeValue + 2)) * stageValue):
                 screen.blit(yangYinClickUpgradeButton.surface , yangYinClickUpgradeButton.rect)
-            if dotValue > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
+            if data["dotValue"] > ((15000 * ((prestigeValue + 1) ** prestigeValue)) * stageValue):
                 screen.blit(yangYinPrestigeButton.surface , yangYinPrestigeButton.rect)
-            if prestigeValue > (9 ** stageValue) and dotValue > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
+            if prestigeValue > (9 ** stageValue) and data["dotValue"] > int((15000 * (((9 ** stageValue + 1)) ** (9 ** stageValue))) * 0.75):
                 screen.blit(yangYinStagePrestigeButton.surface , yangYinStagePrestigeButton.rect)
         py.display.flip()
     elif level == "Easter Egg Level One":
@@ -1371,6 +1373,11 @@ while programRunning:
                 screen.blit(object.surface , object.rect)
         py.display.flip()
     elif level == "Disco":
+        if ambiencePlaying == False and sfxBool == True:
+            ambiencePlaying = True
+            py.mixer.music.load("Ambience.mp3")
+            py.mixer.music.set_volume(0.5)
+            py.mixer.music.play(-1)
         randomColour = (rd.randint(0 , 255) , rd.randint(0 , 255) , rd.randint(0 , 255))
         if discoMessage == False:
             discoMessage = True
@@ -1378,11 +1385,13 @@ while programRunning:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
+                ambiencePlaying = False
             ms.showinfo("The Disco" , "Your persistence and stubborness paid off. You have entered the disco. If you have epilepsy or feel uncomfortable with flashing lights, do not press the Slash key, as it toggles the flashing lights on and off. If you don't need to worry about that, you can press the Slash key to get fully immersed into the disco. You can also use the key to keep the background on a colour that you like.")
             if sfxBool == True:
                 py.mixer.music.load("Message.wav")
                 py.mixer.music.set_volume(0.4)
                 py.mixer.music.play()
+                ambiencePlaying = False
             ms.showinfo("Some Settings" , "If you wanna change how long it takes for the screen to change colour, you can use the Comma and Period keys to change that. They change based on how small it currently takes for your screen to change colour")
         for event in py.event.get():
             if event.type == py.QUIT:
@@ -1397,6 +1406,7 @@ while programRunning:
                         py.mixer.music.load("Transition.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
+                        ambiencePlaying = False
                     level = "Easter Egg Level Four"
             else:
                 py.mouse.set_cursor(py.SYSTEM_CURSOR_ARROW)
@@ -1407,12 +1417,14 @@ while programRunning:
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
+                        ambiencePlaying = False
                         ms.showinfo("Sound Effects" , "Sound effects are now off")
                     elif sfxBool == False:
                         sfxBool = True
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
+                        ambiencePlaying = False
                         ms.showinfo("Sound Effects" , "Sound effects are now on")
                 if event.key == py.K_SLASH:
                     if flashingBool == True:
@@ -1427,6 +1439,7 @@ while programRunning:
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
+                        ambiencePlaying = False
                     ms.showinfo("Screen Flash" , screenFlashCount)
                 if event.key == py.K_PERIOD:
                     if discoDuration > 99:
@@ -1441,6 +1454,7 @@ while programRunning:
                         py.mixer.music.load("Message.wav")
                         py.mixer.music.set_volume(0.4)
                         py.mixer.music.play()
+                        ambiencePlaying = False
                     ms.showinfo("Screen Flash" , screenFlashCount)
             if event.type == SCREENCOLOURCHANGE and flashingBool == True:
                 randomColour = (rd.randint(0 , 255) , rd.randint(0 , 255) , rd.randint(0 , 255))
